@@ -45,3 +45,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Grounds
+    uniqueID: 2253950461
+    locked: 0
+  - name: Blocks
+    uniqueID: 3471320431
+    locked: 0
+  - name: Player
+    uniqueID: 4289112865
+    locked: 0
+  - name: Items
+    uniqueID: 3623560069
+    locked: 0

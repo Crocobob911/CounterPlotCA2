@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2118341263423883399}
   - component: {fileID: 2118341263423883416}
-  - component: {fileID: -471165809153650056}
   - component: {fileID: 2118341263423883398}
+  - component: {fileID: 8019336138949852823}
   m_Layer: 0
   m_Name: ETCitem
   m_TagString: Untagged
@@ -69,8 +69,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -671407227
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ace124e009257ba419d3935280fec268, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -80,21 +80,9 @@ SpriteRenderer:
   m_Size: {x: 0.16, y: 0.16}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-471165809153650056
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2118341263423883417}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70ba65bdc1931c845804433ff7aae110, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!58 &2118341263423883398
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -111,3 +99,15 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.08
+--- !u!114 &8019336138949852823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2118341263423883417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25167d07bf0541c47a462fa1a4554bc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

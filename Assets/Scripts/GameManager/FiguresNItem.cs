@@ -4,38 +4,36 @@ using UnityEngine;
 
 public class FiguresNItem : MonoBehaviour
 {
-    [SerializeField] private Sprite Sample;
     [SerializeField] private GameObject Player;
     [SerializeField] private GameObject Arti;
     [SerializeField] private GameObject ETCi;
-    
 
-    //int mHealth = 125;
-    int pHealth = 125;
-    int mMana = 125;
-    float pMana = 125;
-    //float manaResen =25;
-    //int offenPoint=125;
-    //int defenPoint=0;
-    //int evaPoint=0;
-    //float charSpeed=0.5f;
-    //float charSize=100;
-    int pGold=5;
-    int goldDropRate= 10;         //max :20
-    int ThreeGoldDropRate = 10;
-    int pWizstone=2;
-    int wizstoneDropRate= 5;    //max : 10
-    int chestAppearRate= 3;     //max : 10
-    int HPpotionDropRate= 5;    //max : 10
-    int BigHPotionDropRate = 10; //일단은 고정치
-    int MPpotionDropRate = 5;   //max : 10
-    //int castingNum=1;
-    
+
+    //private int mHealth = 125;
+    private int pHealth = 125;
+    private int mMana = 125;
+    private float pMana = 125;
+    //private float manaResen =25;
+    //private int offenPoint=125;
+    //private int defenPoint=0;
+    //private int evaPoint=0;
+    //private float charSpeed=0.5f;
+    //private float charSize=100;
+    private int pGold =5;
+    private int goldDropRate = 10;         //max :20
+    private int ThreeGoldDropRate = 10;
+    private int pWizstone=2;
+    private int wizstoneDropRate = 5;    //max : 10
+    private int chestAppearRate = 3;     //max : 10
+    private int HPpotionDropRate = 5;    //max : 10
+    private int BigHPotionDropRate = 10; //일단은 고정치
+    private int MPpotionDropRate = 5;   //max : 10
+    //private int castingNum=1;
+
 
     public void AppearArti(Vector2 position) //아티팩트 등장
     {
         Instantiate(Arti, position, Quaternion.identity);
-        //아티팩트 생성
     }
     public int RandArti(SpriteRenderer sp)
     {
@@ -44,29 +42,25 @@ public class FiguresNItem : MonoBehaviour
         // 아티팩트 등급 결정 부분
         randInt = Random.Range(0, 100);
         if      (randInt < 55)  rarity = 0;  //일반 : 55%
-        else if (randInt < 80)  rarity = 0;  //레어 : 25%
-        else if (randInt < 95)  rarity = 0;  //에픽 : 15%
-        else                    rarity = 0;  //전설 : 5%
+        else if (randInt < 80)  rarity = 1;  //레어 : 25%
+        else if (randInt < 95)  rarity = 2;  //에픽 : 15%
+        else                    rarity = 3;  //전설 : 5%
         
         // 동일 등급 내, 아티팩트 id 결정 함수
 
         switch (rarity)
         {
             case 0:
-                //id = Random.Range(001,100);
-                id = 000;
+                id = Random.Range(000,002);
                 break;
             case 1:
-                //id = Random.Range(101, 200);
-                id = 000;
+                id = Random.Range(101, 104);
                 break;
             case 2:
-                //id = Random.Range(201, 300);
-                id = 000;
+                id = Random.Range(201, 205);
                 break;
             case 3:
-                //id = Random.Range(301, 306);
-                id = 000;
+                id = Random.Range(301, 302);
                 break;
         }
         ApplySprite(id, sp);
@@ -138,17 +132,34 @@ public class FiguresNItem : MonoBehaviour
 
     public void ApplySprite(int id, SpriteRenderer sp)
     {
-        // SpriteRenderer spriteR = gameObject.GetComponent<SpriteRenderer>();
-        // Sprite[] sprites = Resources.LoadAll<Sprite>("Sprites/Player/Player01");
-        // spriteR.sprite = sprites[0];
-        if (id == 000)
+        if (id / 100 == 0)
         {
-            sp.sprite = Sample;
+            sp.sprite = Resources.Load<Sprite>("Sprites/Artifacts/Common/" + id);
+            return;
+        }
+        if (id / 100 == 1)
+        {
+            sp.sprite = Resources.Load<Sprite>("Sprites/Artifacts/Rare/" + id);
+            return;
+        }
+        if (id / 100 == 2)
+        {
+            sp.sprite = Resources.Load<Sprite>("Sprites/Artifacts/Epic/" + id);
+            return;
+        }
+        if (id / 100 == 3)
+        {
+            sp.sprite = Resources.Load<Sprite>("Sprites/Artifacts/Legendary/" + id);
+            return;
+        }
+        if (id / 100 == 5)
+        {
+            sp.sprite = Resources.Load<Sprite>("Sprites/Scrolls/" + id);
             return;
         }
         if (id / 100 == 6)
         {
-            sp.sprite = Resources.Load<Sprite>("Sprites/ETCitem/"+id);
+            sp.sprite = Resources.Load<Sprite>("Sprites/ETCitems/"+id);
             return;
         }
 
@@ -171,7 +182,6 @@ public class FiguresNItem : MonoBehaviour
     }
     public void ApplyETCitem(int id)
     {
-       Debug.Log("ApplyEtc");
        switch (id)
         {
             case 601 :
@@ -210,12 +220,14 @@ public class FiguresNItem : MonoBehaviour
     
     private void Awake()
     {
-      //  ETCiSprites = new Sprite[10];
-       // ArtiSprites = new Sprite[10];
-       // ETCiSprites = Resources.LoadAll<Sprite>("Sprites/ETCitem/601_HealthPotionBig");
-       // ArtiSprites = Resources.LoadAll<Sprite>("Sprites/Artifacts/crown");
-
-        AppearArti(new Vector2(3, 3));
+        AppearArti(new Vector2(5, 5));
+        AppearArti(new Vector2(5, 0));
+        AppearArti(new Vector2(0, 5));
+        AppearArti(new Vector2(-5, 0));
+        AppearArti(new Vector2(-5, -5));
+        AppearArti(new Vector2(0, -5));
+        AppearArti(new Vector2(5, -5));
+        AppearArti(new Vector2(-5, 5));
         AppearETCitem(3, new Vector2(-3, 3));
         AppearETCitem(3, new Vector2(0, -3));
         AppearETCitem(3, new Vector2(0, 3));
@@ -223,6 +235,7 @@ public class FiguresNItem : MonoBehaviour
         AppearETCitem(3, new Vector2(3, 0));
         AppearETCitem(3, new Vector2(3, -3));
         AppearETCitem(3, new Vector2(-3, -3));
+        AppearETCitem(3, new Vector2(3, 3));
     }
 
 

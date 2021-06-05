@@ -4,20 +4,18 @@ using UnityEngine;
 
 public class ETCitem : MonoBehaviour
 {
-    private GameObject GM;
-
+    private FiguresNItem figuresNItem;
     private int id = 000;
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        GM.GetComponent<FiguresNItem>().ApplyETCitem(id); //캐릭터(rigidbody2D를 가진 애)가 먹으면 게임매니저에게 값 전달(id)
-        Destroy(gameObject); //게임 오브젝트 소멸
+        figuresNItem.ApplyETCitem(id);
+        Destroy(gameObject);
     }
     void Awake()
     {
-        GM = GameObject.FindGameObjectWithTag("GameManager");
-        id = GM.GetComponent<FiguresNItem>().RandETCitem(GetComponent<SpriteRenderer>());// 1. 등급과 아티팩트 id 정하는 함수 호출 및 저장
-        // 2. 해당 id 에 맞는 스프라이트로 변경
+        figuresNItem = GameObject.FindGameObjectWithTag("GameManager").GetComponent<FiguresNItem>(); ;
+        id = figuresNItem.RandETCitem(GetComponent<SpriteRenderer>());
     }
     void Start()
     {

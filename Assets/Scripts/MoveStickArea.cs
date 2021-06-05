@@ -10,6 +10,8 @@ public class MoveStickArea : MonoBehaviour
     [SerializeField] private Player player;
     [SerializeField] private GameObject Camera;
 
+    private LeadCamera leadCamera;
+
     private Vector3 startPos;
     private Vector3 moveVec;
     private float moveDis;
@@ -21,6 +23,7 @@ public class MoveStickArea : MonoBehaviour
         Init();
         startPos = transform.position;
         stickBackRadius = stickBack.GetComponent<RectTransform>().rect.width / 2f;
+        leadCamera = Camera.GetComponent<LeadCamera>();
         //Debug.Log(stickBackRadius);
 
         stickBack.SetActive(false);
@@ -30,8 +33,8 @@ public class MoveStickArea : MonoBehaviour
     {
         if (isMoving)
         {
-            player.Move(moveVec * moveDis / 10); 
-            Camera.GetComponent<LeadCamera>().recieveRot(moveVec*moveDis/16);
+            player.Move(moveVec * moveDis / 10);
+            leadCamera.recieveRot(moveVec * moveDis / 32);
         }
     }
 
@@ -74,6 +77,6 @@ public class MoveStickArea : MonoBehaviour
         stickBack.transform.localPosition = Vector3.zero;
         stick.transform.localPosition = Vector3.zero;
         stickBack.SetActive(false);
-        Camera.GetComponent<LeadCamera>().recieveRot(new Vector3(0,0,0));
+        leadCamera.recieveRot(new Vector3(0, 0, 0));
     }
 }
