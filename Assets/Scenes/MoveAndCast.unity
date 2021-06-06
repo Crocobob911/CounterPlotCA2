@@ -528,7 +528,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &519420033
 MonoBehaviour:
@@ -768,7 +768,7 @@ Transform:
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!70 &815354544
 CapsuleCollider2D:
@@ -1110,70 +1110,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1141318826
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1141318827}
-  - component: {fileID: 1141318828}
-  - component: {fileID: 1141318829}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: GameManager
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1141318827
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1141318826}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1141318828
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1141318826}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27446bbddfcfa8b4e81b9a546512ec05, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GO_Player: {fileID: 815354540}
-  GO_Arti: {fileID: 3354544781750625030, guid: c404763506023db4aaa9199438e1915a, type: 3}
-  GO_ETCi: {fileID: 2118341263423883417, guid: 0e0ceea9f269fa14e9df21b7555b3bb8, type: 3}
-  GO_Scro: {fileID: 2497583910981434960, guid: f14d7729b55a8f4449664a3bbea6f59a, type: 3}
-  GO_Box: {fileID: 3603139448250230973, guid: 582f7dac2b4f3ca48a5f734e426ed16c, type: 3}
-  GO_LockedBox: {fileID: 3603139448250230973, guid: 8edaf058d5afc6040afdc44b510db56c,
-    type: 3}
---- !u!114 &1141318829
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1141318826}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4874bdfd5f1cda94fbbe27cfc3af4ffc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GO_figuresUI: {fileID: 738472757}
 --- !u!1 &1416551828
 GameObject:
   m_ObjectHideFlags: 0
@@ -1981,7 +1917,7 @@ RectTransform:
   - {fileID: 1416551829}
   - {fileID: 2133573267}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2088,37 +2024,7 @@ Transform:
   m_LocalScale: {x: 6.529369, y: 6.529369, z: 6.529369}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1989234563
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1989234564}
-  m_Layer: 0
-  m_Name: ArtifactPool
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1989234564
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1989234563}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.0391339, y: 1.1601341, z: -305.39328}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2133573266
 GameObject:
@@ -2175,6 +2081,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f8a6169dfcf6c84d976a9062a0d1c6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  linePool: {fileID: 0}
+  linePool: {fileID: 643927234}
   drawLines: 
-  canvas: {fileID: 0}
+  canvas: {fileID: 1919509310}

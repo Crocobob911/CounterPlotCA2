@@ -48,16 +48,6 @@ public class CastPattern : MonoBehaviour
         circleOnEdit = null;
     }
 
-    private void StopDraw() //드로잉이 끝났을 때 변수들 초기화
-    { //이거 나중에 보고 그냥 MouseUp에 적어두거나 하자, 굳이 함수로 구별말고
-        Init();
-        foreach (var line in pooledLines)
-        {
-            linePool.ReturnObject(line.gameObject);
-        }
-        pooledLines.Clear();
-    }
-
     public void OnMouseDownCircle(CircleId circleID)
     {
         //Debug.Log("Down : " + circleID.id);
@@ -77,7 +67,12 @@ public class CastPattern : MonoBehaviour
     public void OnMouseUpCircle(CircleId circleID)
     {
         //Debug.Log("Up : " + circleID.id);
-        StopDraw();
+        Init();
+        foreach (var line in pooledLines)
+        {
+            linePool.ReturnObject(line.gameObject);
+        }
+        pooledLines.Clear();
     }
 
     void SetLine(CircleId circle)
@@ -94,7 +89,7 @@ public class CastPattern : MonoBehaviour
         var pooledLine = linePool.GetLine(circle.transform.localPosition, circle.id);
 
         lineOnEdit = pooledLine.gameObject;
-        lineOnEditRcTs = pooledLine.gameObject.GetComponent<RectTransform>();
+        lineOnEditRcTs = lineOnEdit.GetComponent<RectTransform>();
         circleOnEdit = circle;
 
         pooledLines.Add(pooledLine);
