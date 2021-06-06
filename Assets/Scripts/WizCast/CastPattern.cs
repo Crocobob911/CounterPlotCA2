@@ -21,7 +21,7 @@ public class CastPattern : MonoBehaviour
     void Start()
     {
         //CastArea의 Circle 들을 딕셔너리에 저장하는 과정
-        for(int i=0; i<5; i++)
+        for (int i = 0; i < 5; i++)
         {
             circles.Add(i, transform.GetChild(i + 1).GetComponent<CircleId>());
             circles[i].id = i;
@@ -68,7 +68,7 @@ public class CastPattern : MonoBehaviour
     public void OnMouseEnterCircle(CircleId circleID)
     {
         //Debug.Log("Enter : " + circleID.id);
-        if(isDrawing == true)
+        if (isDrawing == true)
         {
             SetLine(circleID);
         }
@@ -77,7 +77,7 @@ public class CastPattern : MonoBehaviour
     public void OnMouseUpCircle(CircleId circleID)
     {
         //Debug.Log("Up : " + circleID.id);
-        StopDraw();
+        //StopDraw();
     }
 
     void SetLine(CircleId circle)
@@ -87,7 +87,7 @@ public class CastPattern : MonoBehaviour
             foreach (var line in drawLines)
             {
                 if (line == circle.id)
-                        return;
+                    return;
             }
         }
 

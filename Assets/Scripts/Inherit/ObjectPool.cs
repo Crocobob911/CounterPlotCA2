@@ -32,7 +32,7 @@ public class ObjectPool : MonoBehaviour
         return newObj;
     }
 
-    public virtual GameObject GetObject()
+    public GameObject GetObject()
     {
         var obj = poolObjs.Dequeue();
         obj.gameObject.SetActive(true);
