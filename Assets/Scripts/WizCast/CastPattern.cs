@@ -4,68 +4,100 @@ using UnityEngine;
 
 public class CastPattern : MonoBehaviour
 {
-    private List<CircleId> circles;
-    private List<CircleId> drawLines; //선이 무슨 점에서 시작했느냐
+    [SerializeField] private LinePool linePool;
 
-    [SerializeField] private GameObject drawLinePrafab;
-    //[SerializeField] private Canvas can; //drawLinePrafab이 자식으로 들어갈 오브젝트.
+    private Dictionary<int, CircleId> circles = new Dictionary<int, CircleId>();
+    private List<CircleId> pooledLines = new List<CircleId>();
+    [SerializeField] private List<int> drawLines = new List<int>(); //선이 무슨 점에서 시작했느냐
+
+    [SerializeField] private Canvas canvas;
     private bool isDrawing;
+    private GameObject lineOnEdit;
+    private RectTransform lineOnEditRcTs;
+    private CircleId circleOnEdit;
+
+    private Vector3 mousePos = new Vector3();
 
     void Start()
     {
-        circles = new List<CircleId>();
+        //CastArea의 Circle 들을 딕셔너리에 저장하는 과정
         for(int i=0; i<5; i++)
         {
-            circles.Add(transform.GetChild(i + 1).GetComponent<CircleId>());
+            circles.Add(i, transform.GetChild(i + 1).GetComponent<CircleId>());
             circles[i].id = i;
         }
-
         Init();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        if (isDrawing)
+        {
+            mousePos = canvas.transform.InverseTransformPoint(Input.mousePosition);
+
+            lineOnEditRcTs.sizeDelta = new Vector2(lineOnEditRcTs.sizeDelta.x,
+                Vector3.Distance(mousePos, circleOnEdit.transform.position));
+        }
     }
 
     private void Init()
     {
-
+        isDrawing = false;
+        lineOnEdit = null;
+        lineOnEditRcTs = null;
+        circleOnEdit = null;
     }
 
-    private void StopDraw()
-    {
-        isDrawing = false;
-        //나중에 drawLinePrefab을 풀링하면서, 여기서 오브젝트들을 모두 꺼주자.
+    private void StopDraw() //드로잉이 끝났을 때 변수들 초기화
+    { //이거 나중에 보고 그냥 MouseUp에 적어두거나 하자, 굳이 함수로 구별말고
+        Init();
+        foreach (var line in pooledLines)
+        {
+            linePool.ReturnObject(line.gameObject);
+        }
+        pooledLines.Clear();
     }
 
     public void OnMouseDownCircle(CircleId circleID)
     {
-        Debug.Log(circleID.id);
+        //Debug.Log("Down : " + circleID.id);
         isDrawing = true;
-        CreateLine(circleID.transform.localPosition, circleID.id);
+        SetLine(circleID);
     }
 
     public void OnMouseEnterCircle(CircleId circleID)
     {
-        Debug.Log(circleID.id);
+        //Debug.Log("Enter : " + circleID.id);
+        if(isDrawing == true)
+        {
+            SetLine(circleID);
+        }
     }
-    public void OnMouseExitCircle(CircleId circleID)
-    {
-        Debug.Log(circleID.id);
-    }
+
     public void OnMouseUpCircle(CircleId circleID)
     {
-        Debug.Log(circleID.id);
+        //Debug.Log("Up : " + circleID.id);
         StopDraw();
     }
 
-    void CreateLine(Vector3 pos, int id)
+    void SetLine(CircleId circle)
     {
-        var line = GameObject.Instantiate(drawLinePrafab, transform);
-        line.transform.localPosition = pos;
-        //drawLinePrefab 풀링을 구현하자. 하면서 거기 CircleID를 컴포넌트로 넣어두자.
+        if (drawLines != null)
+        {
+            foreach (var line in drawLines)
+            {
+                if (line == circle.id)
+                        return;
+            }
+        }
 
+        var pooledLine = linePool.GetLine(circle.transform.localPosition, circle.id);
+
+        lineOnEdit = pooledLine.gameObject;
+        lineOnEditRcTs = pooledLine.gameObject.GetComponent<RectTransform>();
+        circleOnEdit = circle;
+
+        pooledLines.Add(pooledLine);
+        drawLines.Add(circle.id);
     }
 }
