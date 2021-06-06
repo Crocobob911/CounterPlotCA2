@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Artifact : MonoBehaviour
+public class ScriptArtifact : MonoBehaviour
 {
     private FiguresNItem figuresNItem;
     private int id = 000;
@@ -15,6 +15,6 @@ public class Artifact : MonoBehaviour
     void Awake()
     {
         figuresNItem = GameObject.FindGameObjectWithTag("GameManager").GetComponent<FiguresNItem>();
-        id = figuresNItem.RandArti(GetComponent<SpriteRenderer>());// 1. 등급과 아티팩트 id 정하는 함수 호출 및 저장 (얘가 스프라이트 적용까지 함)
+        id = figuresNItem.RandArti(GetComponent<SpriteRenderer>());
     }
 }

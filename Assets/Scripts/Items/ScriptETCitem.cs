@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ETCitem : MonoBehaviour
+public class ScriptETCitem : MonoBehaviour
 {
     private FiguresNItem figuresNItem;
     private int id = 000;
@@ -16,9 +16,5 @@ public class ETCitem : MonoBehaviour
     {
         figuresNItem = GameObject.FindGameObjectWithTag("GameManager").GetComponent<FiguresNItem>(); ;
         id = figuresNItem.RandETCitem(GetComponent<SpriteRenderer>());
-    }
-    void Start()
-    {
-        
     }
 }
