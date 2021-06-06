@@ -9,8 +9,11 @@ public class ScriptArtifact : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        figuresNItem.ApplyArtifact2Player(id); //캐릭터(rigidbody2D를 가진 애)가 먹으면 게임매니저에게 값 전달(id)
-        Destroy(gameObject); //게임 오브젝트 소멸
+        if (figuresNItem.isColliderPlayer(collider))
+        {
+            figuresNItem.ApplyArtifact2Player(id); //캐릭터(rigidbody2D를 가진 애)가 먹으면 게임매니저에게 값 전달(id)
+            Destroy(gameObject); //게임 오브젝트 소멸
+        }
     }
     void Awake()
     {

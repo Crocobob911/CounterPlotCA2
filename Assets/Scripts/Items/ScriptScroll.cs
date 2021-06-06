@@ -9,8 +9,11 @@ public class ScriptScroll : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        figuresNItem.ApplyScroll2Player(id); 
-        Destroy(gameObject); 
+        if (figuresNItem.isColliderPlayer(collider))
+        {
+            figuresNItem.ApplyScroll2Player(id);
+            Destroy(gameObject);
+        }
     }
     void Awake()
     {

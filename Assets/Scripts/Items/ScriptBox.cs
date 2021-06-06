@@ -5,11 +5,12 @@ using UnityEngine;
 public class ScriptBox : MonoBehaviour
 {
     private FiguresNItem figuresNItem;
-    
-    private void OnTriggerEnter2D(Collider2D collider)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        figuresNItem.BoxOpen(transform.position);
-        Destroy(gameObject);
+        if (figuresNItem.isColliderPlayer(collision.collider)){
+            figuresNItem.BoxOpen(transform.position);
+            Destroy(gameObject);
+        }
     }
     void Start()
     {

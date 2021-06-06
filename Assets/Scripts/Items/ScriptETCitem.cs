@@ -4,17 +4,36 @@ using UnityEngine;
 
 public class ScriptETCitem : MonoBehaviour
 {
+    private Rigidbody2D rigidbody2D;
     private FiguresNItem figuresNItem;
     private int id = 000;
 
-    private void OnTriggerEnter2D(Collider2D collider)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        figuresNItem.ApplyETCitem(id);
-        Destroy(gameObject);
+        if (figuresNItem.isColliderPlayer(collision.collider))
+        {
+            figuresNItem.ApplyETCitem(id);
+            Destroy(gameObject);
+        }
     }
+    private void GravityOff()
+    {
+        rigidbody2D.gravityScale = 0;
+    }
+
     void Awake()
     {
         figuresNItem = GameObject.FindGameObjectWithTag("GameManager").GetComponent<FiguresNItem>(); ;
         id = figuresNItem.RandETCitem(GetComponent<SpriteRenderer>());
+        rigidbody2D = GetComponent<Rigidbody2D>();
+    }
+    private void Start()
+    {
+        int randNumx = Random.Range(-10 , 11);
+        int randNumy = Random.Range(-2 , 3);
+        rigidbody2D.AddForce((new Vector2(randNumx, randNumy).normalized)*2, ForceMode2D.Impulse );
+        rigidbody2D.AddForce(new Vector2(0, 7), ForceMode2D.Impulse);
+        rigidbody2D.gravityScale = 1;
+        Invoke("GravityOff", 0.6f);
     }
 }

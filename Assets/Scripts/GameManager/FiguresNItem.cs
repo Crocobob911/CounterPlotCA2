@@ -28,7 +28,7 @@ public class FiguresNItem : MonoBehaviour
     private int ThreeGoldDropRate = 10;
     private int pWizstone=2;
     private int wizstoneDropRate = 5;    //max : 10
-    private int chestAppearRate = 3;     //max : 10
+    private int chestAppearRate = 100;     //max : 10
     private int HPpotionDropRate = 5;    //max : 10
     private int BigHPotionDropRate = 10; //일단은 고정치
     private int MPpotionDropRate = 5;   //max : 10
@@ -227,6 +227,14 @@ public class FiguresNItem : MonoBehaviour
         //체력포션, 마나포션, 골드, 위즈스톤 적용
     } // 기타 아이템 획득 시 플레이어, 골드 개수 등 수치 변경
     
+    public bool isColliderPlayer(Collider2D coll){
+        bool isIt = false;
+        Debug.Log(coll);
+        if (coll.gameObject == GO_Player) isIt = true;
+        Debug.Log(isIt);
+        return isIt;
+    }
+
     private void HpMpRecover(bool isHealth, int recover)
     {
         if (isHealth)
@@ -248,6 +256,9 @@ public class FiguresNItem : MonoBehaviour
         return false;
     } //퍼센트 계산기
     
+
+
+
     private void Awake()
     {
         AppearArti(new Vector2(5, 5));
