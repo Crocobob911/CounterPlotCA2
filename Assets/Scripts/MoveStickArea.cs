@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-
 public class MoveStickArea : MonoBehaviour
 {
     [SerializeField] private GameObject stickBack;
