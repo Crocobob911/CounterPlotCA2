@@ -10,8 +10,10 @@ public class FiguresNItem : MonoBehaviour
     [SerializeField] private GameObject GO_Scro;
     [SerializeField] private GameObject GO_Box;
     [SerializeField] private GameObject GO_LockedBox;
+    [SerializeField] private GameObject GO_ArtifactPool;
 
     private UIManage um;
+    private ArtifactPoolScript artifactPoolScript;
 
     private int mHealth = 125;
     private int pHealth = 125;
@@ -32,9 +34,14 @@ public class FiguresNItem : MonoBehaviour
     private int HPpotionDropRate = 5;    //max : 10
     private int BigHPotionDropRate = 10; //일단은 고정치
     private int MPpotionDropRate = 5;   //max : 10
-    //private int castingNum=1;
+                                        //private int castingNum=1;
 
 
+
+    public void ReturnArtifact(GameObject GO)
+    {
+        artifactPoolScript.ReturnObject(GO);
+    }
     public void AppearArti(Vector2 position) //아티팩트 등장
     {
         Instantiate(GO_Arti, position, Quaternion.identity);
@@ -256,47 +263,29 @@ public class FiguresNItem : MonoBehaviour
         return false;
     } //퍼센트 계산기
     
-
-
-
     private void Awake()
     {
-        AppearArti(new Vector2(5, 5));
-        AppearArti(new Vector2(5, 0));
-        AppearArti(new Vector2(0, 5));
-        AppearArti(new Vector2(-5, 0));
-        AppearArti(new Vector2(-5, -5));
-        AppearArti(new Vector2(0, -5));
-        AppearArti(new Vector2(5, -5));
         AppearArti(new Vector2(-5, 5));
-        AppearETCitem(3, new Vector2(-3, 3));
-        AppearETCitem(3, new Vector2(0, -3));
-        AppearETCitem(3, new Vector2(0, 3));
-        AppearETCitem(3, new Vector2(-3, 0));
         AppearETCitem(3, new Vector2(3, 0));
         AppearETCitem(3, new Vector2(3, -3));
         AppearETCitem(3, new Vector2(-3, -3));
         AppearETCitem(3, new Vector2(3, 3));
         AppearScroll(new Vector2(4,4));
-        AppearBox(0, new Vector2(4, 0));
-        AppearBox(0, new Vector2(0, 4));
-        AppearBox(0, new Vector2(-4, 0));
         AppearBox(0, new Vector2(-4, -4));
         AppearBox(1, new Vector2(0, -4));
         AppearBox(2, new Vector2(4, -4));
         AppearBox(3, new Vector2(-4, 4));
     }
-
-
+    
     void Start()
     {
         um = gameObject.GetComponent<UIManage>();
+        artifactPoolScript = GO_ArtifactPool.GetComponent<ArtifactPoolScript>();
     }
 
     void Update()
     {
        um.FiguresSend(mHealth,pHealth,mMana,pMana,offenPoint,defenPoint,pGold,pWizstone);
-       
     }
 }
 
