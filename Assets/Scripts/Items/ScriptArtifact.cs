@@ -18,6 +18,5 @@ public class ScriptArtifact : MonoBehaviour
     void Awake()
     {
         figuresNItem = GameObject.FindGameObjectWithTag("GameManager").GetComponent<FiguresNItem>();
-        id = figuresNItem.RandArti(GetComponent<SpriteRenderer>());
     }
 }

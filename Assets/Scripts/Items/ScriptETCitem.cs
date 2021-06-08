@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ScriptETCitem : MonoBehaviour
 {
-    private Rigidbody2D rigidbody2D;
+   /* private Rigidbody2D rigidbody2D;
     private FiguresNItem figuresNItem;
     private int id = 000;
 
@@ -24,7 +24,7 @@ public class ScriptETCitem : MonoBehaviour
     void Awake()
     {
         figuresNItem = GameObject.FindGameObjectWithTag("GameManager").GetComponent<FiguresNItem>(); ;
-        id = figuresNItem.RandETCitem(GetComponent<SpriteRenderer>());
+        //id = figuresNItem.RandETCitem(GetComponent<SpriteRenderer>());
         rigidbody2D = GetComponent<Rigidbody2D>();
     }
     private void Start()
@@ -35,5 +35,5 @@ public class ScriptETCitem : MonoBehaviour
         rigidbody2D.AddForce(new Vector2(0, 7), ForceMode2D.Impulse);
         rigidbody2D.gravityScale = 1;
         Invoke("GravityOff", 0.6f);
-    }
+    }*/
 }

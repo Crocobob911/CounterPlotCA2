@@ -11,7 +11,7 @@ public class ObjectPool : MonoBehaviour
 
     protected Queue<GameObject> poolObjs = new Queue<GameObject>();
 
-    protected void Start()
+    protected void Awake()
     {
         MakePool(poolLength);
     }

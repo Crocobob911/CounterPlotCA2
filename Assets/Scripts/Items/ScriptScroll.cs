@@ -18,6 +18,6 @@ public class ScriptScroll : MonoBehaviour
     void Awake()
     {
         figuresNItem = GameObject.FindGameObjectWithTag("GameManager").GetComponent<FiguresNItem>();
-        id = figuresNItem.RandScroll(GetComponent<SpriteRenderer>());
+        //id = figuresNItem.RandScroll(GetComponent<SpriteRenderer>());
     }
 }

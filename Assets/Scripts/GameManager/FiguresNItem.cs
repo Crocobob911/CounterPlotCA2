@@ -36,17 +36,16 @@ public class FiguresNItem : MonoBehaviour
     private int MPpotionDropRate = 5;   //max : 10
                                         //private int castingNum=1;
 
-
-
     public void ReturnArtifact(GameObject GO)
     {
         artifactPoolScript.ReturnObject(GO);
     }
     public void AppearArti(Vector2 position) //아티팩트 등장
     {
-        Instantiate(GO_Arti, position, Quaternion.identity);
+        int id = RandArti();
+        artifactPoolScript.GetArti(position, id, ApplySprite(id));
     }
-    public int RandArti(SpriteRenderer sp)
+    public int RandArti()
     {
         int id = 0, rarity = 0, randInt=0;
 
@@ -62,7 +61,7 @@ public class FiguresNItem : MonoBehaviour
         switch (rarity)
         {
             case 0:
-                id = Random.Range(000,002);
+                id = Random.Range(001,002);
                 break;
             case 1:
                 id = Random.Range(101, 104);
@@ -74,7 +73,6 @@ public class FiguresNItem : MonoBehaviour
                 id = Random.Range(301, 302);
                 break;
         }
-        ApplySprite(id, sp);
         return id;
     }  //아티팩트 등장 시(상자, 상점, 유적 클리어 등) 등급과 아티팩트 id 결정부분
 
@@ -82,13 +80,13 @@ public class FiguresNItem : MonoBehaviour
     {
         Instantiate(GO_Scro, position, Quaternion.identity);
     }
-    public int RandScroll(SpriteRenderer sp) //스크롤 등장 시(상점, 유적클리어 등) 등급과 위즈 id 결정부분
+    /*public int RandScroll(SpriteRenderer sp) //스크롤 등장 시(상점, 유적클리어 등) 등급과 위즈 id 결정부분
     {
         int id = 500;
         ApplySprite(id, sp);
         return id;
     }
-
+    */
     public void AppearETCitem(int monsterType, Vector2 position) // 0 일반몬스터 1 엘리트 몬스터  // 엘리트 몬스터면 꽝 확률 -20%
     {
         int randNum = Random.Range(0,100-(monsterType*20));
@@ -99,7 +97,7 @@ public class FiguresNItem : MonoBehaviour
         }
         return ;
     } // 몬스터 사망 시, 상자 오픈 시(?)_일단은// 기타 아이템 등장 확률
-    public int RandETCitem(SpriteRenderer sp)
+    /*public int RandETCitem(SpriteRenderer sp)
     {
         int id = 600, randNum = Random.Range(0, goldDropRate + wizstoneDropRate + HPpotionDropRate + MPpotionDropRate);
         if (randNum <= 0 + HPpotionDropRate) //체력포션
@@ -119,7 +117,7 @@ public class FiguresNItem : MonoBehaviour
         ApplySprite(id, sp);  // id에 해당하는 스프라이트 적용
         return id;
     } // 몬스터 사망 시, 상자 오픈 시(?)_일단은// 기타 아이템 등장 확률
-
+    */
     public void AppearBox(int AreaType, Vector2 position) //구역 클리어 시
     {
         if (AreaType == 0) //일반 구역 클리어(몬스터 처치)
@@ -156,39 +154,33 @@ public class FiguresNItem : MonoBehaviour
         return isOpen;
     }
 
-    public void ApplySprite(int id, SpriteRenderer sp)
+    public Sprite ApplySprite(int id)
     {
         if (id / 100 == 0)
         {
-            sp.sprite = Resources.Load<Sprite>("Sprites/Artifacts/Common/" + id);
-            return;
+            return Resources.Load<Sprite>("Sprites/Artifacts/Common/" + id);
         }
         if (id / 100 == 1)
         {
-            sp.sprite = Resources.Load<Sprite>("Sprites/Artifacts/Rare/" + id);
-            return;
+            return Resources.Load<Sprite>("Sprites/Artifacts/Rare/" + id);
         }
         if (id / 100 == 2)
         {
-            sp.sprite = Resources.Load<Sprite>("Sprites/Artifacts/Epic/" + id);
-            return;
+            return Resources.Load<Sprite>("Sprites/Artifacts/Epic/" + id);
         }
         if (id / 100 == 3)
         {
-            sp.sprite = Resources.Load<Sprite>("Sprites/Artifacts/Legendary/" + id);
-            return;
+            return Resources.Load<Sprite>("Sprites/Artifacts/Legendary/" + id);
         }
         if (id / 100 == 5)
         {
-            sp.sprite = Resources.Load<Sprite>("Sprites/Scrolls/" + id);
-            return;
+            return Resources.Load<Sprite>("Sprites/Scrolls/" + id);
         }
         if (id / 100 == 6)
         {
-            sp.sprite = Resources.Load<Sprite>("Sprites/ETCitems/"+id);
-            return;
+            return Resources.Load<Sprite>("Sprites/ETCitems/"+id);
         }
-
+        return Resources.Load<Sprite>("Sprites/Artifacts/0");
     } // 모든 아이템 등장 시 스프라이트 적용(필드에 등장 or 인벤에 표현
     public void ApplyArtifact2Player(int id)
     {
@@ -265,22 +257,23 @@ public class FiguresNItem : MonoBehaviour
     
     private void Awake()
     {
-        AppearArti(new Vector2(-5, 5));
-        AppearETCitem(3, new Vector2(3, 0));
-        AppearETCitem(3, new Vector2(3, -3));
-        AppearETCitem(3, new Vector2(-3, -3));
-        AppearETCitem(3, new Vector2(3, 3));
-        AppearScroll(new Vector2(4,4));
-        AppearBox(0, new Vector2(-4, -4));
-        AppearBox(1, new Vector2(0, -4));
-        AppearBox(2, new Vector2(4, -4));
-        AppearBox(3, new Vector2(-4, 4));
+
     }
-    
     void Start()
     {
         um = gameObject.GetComponent<UIManage>();
         artifactPoolScript = GO_ArtifactPool.GetComponent<ArtifactPoolScript>();
+
+        AppearArti(new Vector2(-5, 5));
+        /*AppearETCitem(3, new Vector2(3, 0));
+        AppearETCitem(3, new Vector2(3, -3));
+        AppearETCitem(3, new Vector2(-3, -3));
+        AppearETCitem(3, new Vector2(3, 3));
+        AppearScroll(new Vector2(4, 4));
+        AppearBox(0, new Vector2(-4, -4));
+        AppearBox(1, new Vector2(0, -4));
+        AppearBox(2, new Vector2(4, -4));
+        AppearBox(3, new Vector2(-4, 4));*/
     }
 
     void Update()
