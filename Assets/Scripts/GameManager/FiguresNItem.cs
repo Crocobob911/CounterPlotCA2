@@ -186,7 +186,7 @@ public class FiguresNItem : MonoBehaviour
     {
         switch (id)
         {
-            case 000:
+            case 1:
                 //sampleitem()~
                 GO_Player.GetComponent<Transform>().position = new Vector3(0, 0, 0);
                 pHealth -= 100;
