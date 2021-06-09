@@ -9,11 +9,16 @@ public class FiguresNItem : MonoBehaviour
     [SerializeField] private GameObject GO_ETCi;
     [SerializeField] private GameObject GO_Scro;
     [SerializeField] private GameObject GO_Box;
-    [SerializeField] private GameObject GO_LockedBox;
     [SerializeField] private GameObject GO_ArtifactPool;
+    [SerializeField] private GameObject GO_ETCItemPool;
+    [SerializeField] private GameObject GO_ScrollPool;
+    [SerializeField] private GameObject GO_BoxPool;
 
     private UIManage um;
     private ArtifactPoolScript artifactPoolScript;
+    private ETCItemPoolScript eTCItemPoolScript;
+    private ScrollPoolScript scrollPoolScript;
+    private BoxPoolScript boxPoolScript;
 
     private int mHealth = 125;
     private int pHealth = 125;
@@ -36,10 +41,7 @@ public class FiguresNItem : MonoBehaviour
     private int MPpotionDropRate = 5;   //max : 10
                                         //private int castingNum=1;
 
-    public void ReturnArtifact(GameObject GO)
-    {
-        artifactPoolScript.ReturnObject(GO);
-    }
+    
     public void AppearArti(Vector2 position) //아티팩트 등장
     {
         int id = RandArti();
@@ -75,29 +77,38 @@ public class FiguresNItem : MonoBehaviour
         }
         return id;
     }  //아티팩트 등장 시(상자, 상점, 유적 클리어 등) 등급과 아티팩트 id 결정부분
+    public void ReturnArtifact(GameObject GO)
+    {
+        artifactPoolScript.ReturnObject(GO);
+    }
 
     public void AppearScroll(Vector2 position) // 스크롤 등장
     {
-        Instantiate(GO_Scro, position, Quaternion.identity);
+        int id = RandScroll();
+        artifactPoolScript.GetArti(position, id, ApplySprite(id));
     }
-    /*public int RandScroll(SpriteRenderer sp) //스크롤 등장 시(상점, 유적클리어 등) 등급과 위즈 id 결정부분
+    public int RandScroll() //스크롤 등장 시(상점, 유적클리어 등) 등급과 위즈 id 결정부분
     {
         int id = 500;
-        ApplySprite(id, sp);
         return id;
     }
-    */
+    public void ReturnScro(GameObject GO)
+    {
+        scrollPoolScript.ReturnObject(GO);
+    }
+
     public void AppearETCitem(int monsterType, Vector2 position) // 0 일반몬스터 1 엘리트 몬스터  // 엘리트 몬스터면 꽝 확률 -20%
     {
         int randNum = Random.Range(0,100-(monsterType*20));
         if (randNum < goldDropRate + wizstoneDropRate + HPpotionDropRate + MPpotionDropRate)
         {
-            Instantiate(GO_ETCi, position, Quaternion.identity);
+            int id = RandETCitem();
+            eTCItemPoolScript.GetETCi(position, id, ApplySprite(id));
             return;
         }
         return ;
     } // 몬스터 사망 시, 상자 오픈 시(?)_일단은// 기타 아이템 등장 확률
-    /*public int RandETCitem(SpriteRenderer sp)
+    public int RandETCitem()
     {
         int id = 600, randNum = Random.Range(0, goldDropRate + wizstoneDropRate + HPpotionDropRate + MPpotionDropRate);
         if (randNum <= 0 + HPpotionDropRate) //체력포션
@@ -114,37 +125,44 @@ public class FiguresNItem : MonoBehaviour
         }
         else if (randNum <= HPpotionDropRate + MPpotionDropRate + goldDropRate + wizstoneDropRate)
             id = 606;//위즈스톤 1개 등장 606
-        ApplySprite(id, sp);  // id에 해당하는 스프라이트 적용
         return id;
     } // 몬스터 사망 시, 상자 오픈 시(?)_일단은// 기타 아이템 등장 확률
-    */
+    public void ReturnETCItem(GameObject GO)
+    {
+        eTCItemPoolScript.ReturnObject(GO);
+    }
+
     public void AppearBox(int AreaType, Vector2 position) //구역 클리어 시
     {
+        int id = -1;
+        id = DecisionBoxType(AreaType);
+        if (id == -1)
+            return;
+        boxPoolScript.GetBox(position, id, ApplySprite(id));
+    }
+    public int DecisionBoxType(int AreaType)
+    {
+        int id = -1;  // 0= 상자 / 1= 잠긴상자 -1=없음
         if (AreaType == 0) //일반 구역 클리어(몬스터 처치)
         {
-            if (Percent(chestAppearRate))//상자 나올 확률은 chestAppearRate 수치에 따라 달라짐
-            {
-                Instantiate(GO_LockedBox, position, Quaternion.identity);
-                return;
-            }
-            return;
+            if (Percent(chestAppearRate))
+                return id = 0;
+            return id = -1;
         }
-        else if(AreaType == 1 || AreaType == 2 || AreaType == 3) // 숨겨진 구역 클리어(보스 및 몬스터 처치)
+        else if (AreaType == 1 || AreaType == 2 || AreaType == 3) // 숨겨진 구역 클리어(보스 및 몬스터 처치)
         {
-            Instantiate(GO_Box, position, Quaternion.identity);
-            return;
+            return id = 1;
         }
+        return id;
     }
-    public void BoxOpen(Vector2 position)
-    {
-        AppearArti(position);
-        AppearETCitem(0,position);
-        return;
-    }
-    public bool LockedBoxOpen(Vector2 position)
+    public bool BoxOpen(int id, Vector2 position)
     {
         bool isOpen = false;
-        if (pWizstone > 0)
+        if (id == 0) //일반상자
+        {
+            return isOpen = true;
+        }
+        if (pWizstone > 0) //닫힌상자
         {
             pWizstone--;
             AppearArti(position);
@@ -153,6 +171,11 @@ public class FiguresNItem : MonoBehaviour
         }
         return isOpen;
     }
+    public void ReturnBox(GameObject GO)
+    {
+        boxPoolScript.ReturnObject(GO);
+    }
+
 
     public Sprite ApplySprite(int id)
     {
@@ -228,9 +251,7 @@ public class FiguresNItem : MonoBehaviour
     
     public bool isColliderPlayer(Collider2D coll){
         bool isIt = false;
-        Debug.Log(coll);
         if (coll.gameObject == GO_Player) isIt = true;
-        Debug.Log(isIt);
         return isIt;
     }
 
@@ -257,15 +278,16 @@ public class FiguresNItem : MonoBehaviour
     
     private void Awake()
     {
-
+        um = gameObject.GetComponent<UIManage>();
+        artifactPoolScript = GO_ArtifactPool.GetComponent<ArtifactPoolScript>();
+        eTCItemPoolScript = GO_ETCItemPool.GetComponent<ETCItemPoolScript>();
+        scrollPoolScript = GO_ScrollPool.GetComponent<ScrollPoolScript>();
+        boxPoolScript = GO_BoxPool.GetComponent<BoxPoolScript>();
     }
     void Start()
     {
-        um = gameObject.GetComponent<UIManage>();
-        artifactPoolScript = GO_ArtifactPool.GetComponent<ArtifactPoolScript>();
-
         AppearArti(new Vector2(-5, 5));
-        /*AppearETCitem(3, new Vector2(3, 0));
+        AppearETCitem(3, new Vector2(3, 0));
         AppearETCitem(3, new Vector2(3, -3));
         AppearETCitem(3, new Vector2(-3, -3));
         AppearETCitem(3, new Vector2(3, 3));
@@ -273,7 +295,7 @@ public class FiguresNItem : MonoBehaviour
         AppearBox(0, new Vector2(-4, -4));
         AppearBox(1, new Vector2(0, -4));
         AppearBox(2, new Vector2(4, -4));
-        AppearBox(3, new Vector2(-4, 4));*/
+        AppearBox(3, new Vector2(-4, 4));
     }
 
     void Update()
