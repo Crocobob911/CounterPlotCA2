@@ -7,7 +7,7 @@ public class LinePool : ObjectPool
     public CircleId GetLine(Vector3 pos, int id)
     {
         var obj = GetObject().GetComponent<CircleId>();
-        Debug.Log(obj);
+        //Debug.Log(obj);
         obj.gameObject.transform.localPosition = pos;
         obj.id = id;
         return obj;

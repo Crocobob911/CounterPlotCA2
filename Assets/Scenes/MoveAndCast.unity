@@ -188,21 +188,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 2133573268}
-          m_MethodName: OnMouseExitCircle
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 85074339}
-            m_ObjectArgumentAssemblyTypeName: CircleId, Assembly-CSharp
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
   - eventID: 2
     callback:
       m_PersistentCalls:
@@ -444,6 +429,7 @@ GameObject:
   - component: {fileID: 519420030}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
+  - component: {fileID: 519420034}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -544,6 +530,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Target: {fileID: 815354540}
   CameraZ: -10
+--- !u!114 &519420034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f600cc7124fd18846a9252ef0cdfecbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toggleKey: 96
+  openOnStart: 0
+  shakeToOpen: 1
+  shakeRequiresTouch: 0
+  shakeAcceleration: 3
+  toggleThresholdSeconds: 0.5
+  restrictLogCount: 0
+  maxLogCount: 1000
+  logFontSize: 100
+  scaleFactor: 1
 --- !u!1 &643927232
 GameObject:
   m_ObjectHideFlags: 0
@@ -874,21 +882,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 2133573268}
-          m_MethodName: OnMouseExitCircle
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 821566010}
-            m_ObjectArgumentAssemblyTypeName: CircleId, Assembly-CSharp
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
   - eventID: 2
     callback:
       m_PersistentCalls:
@@ -1145,10 +1138,10 @@ RectTransform:
   m_Father: {fileID: 1919509311}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 428.09998, y: 0}
-  m_SizeDelta: {x: 856.17816, y: 1215}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 428.09375, y: 0}
+  m_SizeDelta: {x: 856.17816, y: 135}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1416551830
 MonoBehaviour:
@@ -1328,21 +1321,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 2133573268}
-          m_MethodName: OnMouseExitCircle
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 1499605487}
-            m_ObjectArgumentAssemblyTypeName: CircleId, Assembly-CSharp
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
   - eventID: 2
     callback:
       m_PersistentCalls:
@@ -1481,21 +1459,6 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 2133573268}
           m_MethodName: OnMouseEnterCircle
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 1633342165}
-            m_ObjectArgumentAssemblyTypeName: CircleId, Assembly-CSharp
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 2133573268}
-          m_MethodName: OnMouseExitCircle
           m_Mode: 2
           m_Arguments:
             m_ObjectArgument: {fileID: 1633342165}
@@ -1652,21 +1615,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 2133573268}
-          m_MethodName: OnMouseExitCircle
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 1707744645}
-            m_ObjectArgumentAssemblyTypeName: CircleId, Assembly-CSharp
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
   - eventID: 2
     callback:
       m_PersistentCalls:
@@ -1780,10 +1728,10 @@ RectTransform:
   m_Father: {fileID: 1416551829}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 324.19592, y: 324.19592}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 428, y: 0}
+  m_SizeDelta: {x: 324.19592, y: -891.8041}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1737903090
 MonoBehaviour:
@@ -2082,5 +2030,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   linePool: {fileID: 643927234}
-  drawLines: 
   canvas: {fileID: 1919509310}
+  drawLines: 000000000000000000000000000000000000000000000000
