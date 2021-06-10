@@ -8,7 +8,7 @@ public class ScriptETCitem : ArtiScroInherit
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (figuresNItem.isColliderPlayer(collider))
+        if (isOn && figuresNItem.isColliderPlayer(collider))
         {
             figuresNItem.ApplyETCitem(id);
             figuresNItem.ReturnETCItem(gameObject);
@@ -21,7 +21,6 @@ public class ScriptETCitem : ArtiScroInherit
 
     void Awake()
     {
-        figuresNItem = GameObject.FindGameObjectWithTag("GameManager").GetComponent<FiguresNItem>();
         r = GetComponent<Rigidbody2D>();
     }
     private void OnEnable()

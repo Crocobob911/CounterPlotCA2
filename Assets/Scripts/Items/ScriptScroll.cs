@@ -6,7 +6,7 @@ public class ScriptScroll : ArtiScroInherit
 {
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (figuresNItem.isColliderPlayer(collider))
+        if (isOn && figuresNItem.isColliderPlayer(collider))
         {
             figuresNItem.ApplyScroll2Player(id);
             figuresNItem.ReturnScro(gameObject);
