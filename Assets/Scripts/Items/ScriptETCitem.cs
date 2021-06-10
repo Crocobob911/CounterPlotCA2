@@ -5,7 +5,9 @@ using UnityEngine;
 public class ScriptETCitem : MonoBehaviour
 {
     private Rigidbody2D r;
+    private CircleCollider2D c;
     private FiguresNItem figuresNItem;
+
     public int id = 000;
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -23,10 +25,11 @@ public class ScriptETCitem : MonoBehaviour
 
     void Awake()
     {
-        figuresNItem = GameObject.FindGameObjectWithTag("GameManager").GetComponent<FiguresNItem>(); ;
+        figuresNItem = GameObject.FindGameObjectWithTag("GameManager").GetComponent<FiguresNItem>();
+        c = GetComponent<CircleCollider2D>();
         r = GetComponent<Rigidbody2D>();
     }
-    private void Start()
+    private void OnEnable()
     {
         int randNumx = Random.Range(-10 , 11);
         int randNumy = Random.Range(-2 , 3);
