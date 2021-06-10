@@ -85,7 +85,7 @@ public class FiguresNItem : MonoBehaviour
     public void AppearScroll(Vector2 position) // 스크롤 등장
     {
         int id = RandScroll();
-        artifactPoolScript.GetArti(position, id, ApplySprite(id));
+        scrollPoolScript.GetScro(position, id, ApplySprite(id));
     }
     public int RandScroll() //스크롤 등장 시(상점, 유적클리어 등) 등급과 위즈 id 결정부분
     {
@@ -142,27 +142,29 @@ public class FiguresNItem : MonoBehaviour
     }
     public int DecisionBoxType(int AreaType)
     {
-        int id = -1;  // 0= 상자 / 1= 잠긴상자 -1=없음
+        int id = -1;  // 611= 상자 / 612= 잠긴상자 -1=없음
         if (AreaType == 0) //일반 구역 클리어(몬스터 처치)
         {
             if (Percent(chestAppearRate))
-                return id = 0;
+                return id = 611;
             return id = -1;
         }
         else if (AreaType == 1 || AreaType == 2 || AreaType == 3) // 숨겨진 구역 클리어(보스 및 몬스터 처치)
         {
-            return id = 1;
+            return id = 612;
         }
         return id;
     }
     public bool BoxOpen(int id, Vector2 position)
     {
         bool isOpen = false;
-        if (id == 0) //일반상자
+        if (id == 611) //일반상자 611
         {
+            AppearArti(position);
+            AppearETCitem(0, position);
             return isOpen = true;
         }
-        if (pWizstone > 0) //닫힌상자
+        if (id == 612 && pWizstone > 0) //닫힌상자 612
         {
             pWizstone--;
             AppearArti(position);

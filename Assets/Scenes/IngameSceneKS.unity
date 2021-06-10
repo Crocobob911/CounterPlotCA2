@@ -620,7 +620,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 731119451}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.45423496, y: 0.48408532, z: -887.6515}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1205,8 +1205,6 @@ MonoBehaviour:
   GO_ETCi: {fileID: 2118341263423883417, guid: 0e0ceea9f269fa14e9df21b7555b3bb8, type: 3}
   GO_Scro: {fileID: 2497583910981434960, guid: f14d7729b55a8f4449664a3bbea6f59a, type: 3}
   GO_Box: {fileID: 3603139448250230973, guid: 582f7dac2b4f3ca48a5f734e426ed16c, type: 3}
-  GO_LockedBox: {fileID: 3603139448250230973, guid: 8edaf058d5afc6040afdc44b510db56c,
-    type: 3}
   GO_ArtifactPool: {fileID: 1989234563}
   GO_ETCItemPool: {fileID: 1147489504}
   GO_ScrollPool: {fileID: 1704605099}
@@ -1770,7 +1768,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1704605099}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.45423496, y: 0.48408532, z: -887.6515}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1788,8 +1786,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3caa63b68507b447951a92a18c7d26b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolObjPrefab: {fileID: 0}
-  poolLength: 0
+  poolObjPrefab: {fileID: 2497583910981434960, guid: f14d7729b55a8f4449664a3bbea6f59a,
+    type: 3}
+  poolLength: 5
 --- !u!1 &1707744642
 GameObject:
   m_ObjectHideFlags: 0

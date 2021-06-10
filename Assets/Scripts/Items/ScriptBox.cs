@@ -18,5 +18,4 @@ public class ScriptBox : MonoBehaviour
     {
         figuresNItem = GameObject.FindGameObjectWithTag("GameManager").GetComponent<FiguresNItem>();
     }
-    
 }
