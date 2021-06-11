@@ -6,10 +6,11 @@ public class CastPattern : MonoBehaviour
 {
     [SerializeField] private LinePool linePool;
     [SerializeField] private Canvas canvas;
+    [SerializeField] private CastDirector castDirector;
     private Dictionary<int, CircleId> circles = new Dictionary<int, CircleId>();
 
     private List<CircleId> pooledLines = new List<CircleId>();
-    [SerializeField] private int[] drawLines = new int[6]; //선이 무슨 점에서 시작했느냐
+    private int[] drawLines = new int[6]; //선이 무슨 점에서 시작했느냐
     private bool isDrawing;
     private bool stopDrawing;
     private GameObject lineOnEdit;
@@ -115,6 +116,7 @@ public class CastPattern : MonoBehaviour
     public void OnMouseUpCircle(CircleId circleID)
     {
         //Debug.Log("Up : " + circleID.id);
+        castDirector.ActiveWiz(drawLines);
         Init();
     }
 
