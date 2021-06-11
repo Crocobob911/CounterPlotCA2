@@ -6,7 +6,7 @@ public class ScriptETCitem : ArtiScroInherit
 {
     private Rigidbody2D r;
 
-    private void OnTriggerEnter2D(Collider2D collider)
+    private void OnTriggerStay2D(Collider2D collider)
     {
         if (isOn && figuresNItem.isColliderPlayer(collider))
         {
@@ -19,14 +19,16 @@ public class ScriptETCitem : ArtiScroInherit
         r.gravityScale = 0;
     }
 
-    void Awake()
+    private void Awake()
     {
+        PlayAwake();
         r = GetComponent<Rigidbody2D>();
     }
     private void OnEnable()
     {
+        PlayOnEnable();
         int randNumx = Random.Range(-10 , 11);
-        int randNumy = Random.Range(-2 , 3);
+        int randNumy = Random.Range(-1 , 2); 
         r.AddForce((new Vector2(randNumx, randNumy).normalized)*2, ForceMode2D.Impulse );
         r.AddForce(new Vector2(0, 7), ForceMode2D.Impulse);
         r.gravityScale = 1;

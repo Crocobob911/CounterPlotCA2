@@ -2,20 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScriptBox : MonoBehaviour
+public class ScriptBox : ArtiScroInherit
 {
-    private FiguresNItem figuresNItem;
-    public int id;
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerStay2D(Collider2D collider)
     {
-        if (figuresNItem.isColliderPlayer(collision.collider))
+        if (isOn && figuresNItem.isColliderPlayer(collider))
         {
             if (figuresNItem.BoxOpen(id, transform.position))
                 figuresNItem.ReturnBox(gameObject);
         }
     }
-    void Start()
+    private void Awake()
     {
-        figuresNItem = GameObject.FindGameObjectWithTag("GameManager").GetComponent<FiguresNItem>();
+        PlayAwake();
+    }
+    private void OnEnable()
+    {
+        PlayOnEnable();
     }
 }

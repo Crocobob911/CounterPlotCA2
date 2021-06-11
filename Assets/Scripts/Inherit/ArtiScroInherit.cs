@@ -11,12 +11,12 @@ public class ArtiScroInherit : MonoBehaviour
     {
         isOn = true;
     }
-    private void OnEnable()
+    public void PlayOnEnable()
     {
         isOn = false;
         Invoke("TriggerOn", 1);
     }
-    void Awake()
+    public void PlayAwake()
     {
         figuresNItem = GameObject.FindGameObjectWithTag("GameManager").GetComponent<FiguresNItem>();
     }
