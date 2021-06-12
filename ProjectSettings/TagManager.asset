@@ -51,7 +51,7 @@ TagManager:
   - name: Blocks
     uniqueID: 3471320431
     locked: 0
-  - name: Player
+  - name: Object
     uniqueID: 4289112865
     locked: 0
   - name: Items

@@ -37,7 +37,7 @@ public class CastDirector : MonoBehaviour
 
     private void DetectLine(int[] circles)
     {
-        Debug.Log("circles : "+circles[0] + " " + circles[1] + " " + circles[2] + " " + circles[3] + " " + circles[4] + " " + circles[5]);
+        //Debug.Log("circles : "+circles[0] + " " + circles[1] + " " + circles[2] + " " + circles[3] + " " + circles[4] + " " + circles[5]);
         
         #region NumberDetecting
         int a, b;
@@ -79,7 +79,7 @@ public class CastDirector : MonoBehaviour
         #endregion
         Array.Sort(lineNumbers);
 
-        Debug.Log("lineNumbers : "+ lineNumbers[0] + " " + lineNumbers[1] + " " + lineNumbers[2] + " " + lineNumbers[3] + " " + lineNumbers[4]);
+        //Debug.Log("lineNumbers : "+ lineNumbers[0] + " " + lineNumbers[1] + " " + lineNumbers[2] + " " + lineNumbers[3] + " " + lineNumbers[4]);
     }
 
     private void DetectWiz(int[] lines)
