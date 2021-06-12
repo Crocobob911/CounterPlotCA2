@@ -70,14 +70,12 @@ public class ApplyArtifacts : MonoBehaviour  // 세트효과 카운트, 아티�
     public void CallArti(string Arti)
     {
         Invoke(Arti, 0f);
-        CallSetEffect(Coward);
     }
     private void CallSetEffect(SetEffect setEffect)
     {
         if (setEffect.GetsetCount() >= 3 &&  setEffect.GetisApplied() == false)
             Invoke("Apply"+setEffect.GetsetName(), 0f);
     }
-
 
     // Common
     private void C000()
@@ -87,10 +85,10 @@ public class ApplyArtifacts : MonoBehaviour  // 세트효과 카운트, 아티�
     private void C001()
     {
         t.position = new Vector3(0, 0, 0);
-        fni.Delta_pHealth(-75);
-        fni.Delta_pMana(-fni.Get_pMana());
-        fni.Delta_mMana(100);
+        fni.Delta_pHealth(-50);
+        fni.Delta_pMana(-50);
         fni.Delta_mHealth(100);
+        fni.Delta_mMana(100);
         return;
     }
     private void C002()

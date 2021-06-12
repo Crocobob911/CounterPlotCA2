@@ -22,7 +22,7 @@ public class FiguresNItem : MonoBehaviour
     private BoxPoolScript boxPoolScript;
 
     private int mHealth = 125;
-    private int pHealth = 0;
+    private int pHealth = 1;
     private int mMana = 125;
     private float pMana = 0;
     private float manaResen =10;
@@ -42,14 +42,14 @@ public class FiguresNItem : MonoBehaviour
     private int MPpotionDropRate = 5;   //max : 10
     //private int castingNum=1;
 
-    public void Delta_mHealth(int delta)    { if (mHealth + delta < 1) { mHealth = 1; pHealth = 1; } else { mHealth += delta; pHealth += delta; } }
+    public void Delta_mHealth(int delta)    {  if (mHealth + delta < 1) { mHealth = 1; pHealth = 1; } else { mHealth += delta; pHealth += delta; } um.HPbar_SizeChange(mHealth); um.HPbar_Synchro(mHealth, pHealth); }
     public int Get_mHealth()                { return mHealth; }
-    public void Delta_pHealth(int delta)    { if (pHealth + delta < 0) { pHealth = 0; PlayerDeath(); } else if (pHealth + delta > mHealth) pHealth = mHealth; else pHealth += delta; }
+    public void Delta_pHealth(int delta)    { if (pHealth + delta < 0) { pHealth = 0; PlayerDeath(); } else if (pHealth + delta > mHealth) { pHealth = mHealth; } else { pHealth += delta; } um.HPbar_Synchro(mHealth, pHealth); }
     public int Get_pHealth()                { return pHealth; }
     
-    public void Delta_mMana(int delta)  { if (mMana + delta < 1) { mMana = 1; pMana = 1; } else { mMana += delta; pMana += delta; } }
+    public void Delta_mMana(int delta)  { if (mMana + delta < 1) { mMana = 1; pMana = 1; } else { mMana += delta; pMana += delta; } um.MPbar_SizeChange(mMana); um.MPbar_Synchro(mMana, pMana); }
     public int Get_mMana()              { return mMana; }
-    public bool Delta_pMana(float delta)  { bool isGood = true;if (pMana + delta < 0) { isGood = false; return isGood; } else if (pMana + delta > mMana) { pMana = mMana;} else pMana += delta; return isGood; }
+    public bool Delta_pMana(float delta)  { bool isGood = true;if (pMana + delta < 0) { isGood = false; return isGood; } else if (pMana + delta > mMana) { pMana = mMana;} else pMana += delta; um.MPbar_Synchro(mMana, pMana); return isGood;  }
     public float Get_pMana()            { return pMana; }
 
     public void Delta_manaResen(int delta) { if (manaResen + delta < 1) manaResen = 1; else if (manaResen + delta > 50) manaResen = 100; else manaResen += delta; }
@@ -321,11 +321,14 @@ public class FiguresNItem : MonoBehaviour
         AppearBox(2, new Vector2(4, -4));
         AppearBox(3, new Vector2(-4, 4));
         Do_manaResen();
+        um.HPbar_Synchro(mHealth, pHealth);
+        um.MPbar_Synchro(mMana, pMana);
     }
 
     void Update()
     {
         um.FiguresSend(mHealth,pHealth,mMana,pMana,offenPoint,defenPoint,pGold,pWizstone);
+        
     }
 }
 
