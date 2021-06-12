@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FiguresNItem : MonoBehaviour
 {
-    [SerializeField] private GameObject GO_Player; // 아티팩트 적용 테스트 용도로 잠시 할당
+    [SerializeField] private GameObject GO_Player;
     [SerializeField] private GameObject GO_Arti;
     [SerializeField] private GameObject GO_ETCi;
     [SerializeField] private GameObject GO_Scro;
@@ -14,6 +14,7 @@ public class FiguresNItem : MonoBehaviour
     [SerializeField] private GameObject GO_ScrollPool;
     [SerializeField] private GameObject GO_BoxPool;
 
+    private ApplyArtifacts aa;
     private UIManage um;
     private ArtifactPoolScript artifactPoolScript;
     private ETCItemPoolScript eTCItemPoolScript;
@@ -21,27 +22,56 @@ public class FiguresNItem : MonoBehaviour
     private BoxPoolScript boxPoolScript;
 
     private int mHealth = 125;
-    private int pHealth = 125;
+    private int pHealth = 0;
     private int mMana = 125;
-    private float pMana = 125;
-    //private float manaResen =25;
-    private int offenPoint=125;
-    private int defenPoint=0;
+    private float pMana = 0;
+    private float manaResen =10;
+    private int offenPoint = 125;
+    private int defenPoint = 0;
     //private int evaPoint=0;
     //private float charSpeed=0.5f;
     //private float charSize=100;
-    private int pGold =5;
+    private int pGold = 5;
     private int goldDropRate = 10;         //max :20
     private int ThreeGoldDropRate = 10;
-    private int pWizstone=2;
+    private int pWizstone = 2;
     private int wizstoneDropRate = 5;    //max : 10
     private int chestAppearRate = 100;     //max : 10
     private int HPpotionDropRate = 5;    //max : 10
     private int BigHPotionDropRate = 10; //일단은 고정치
     private int MPpotionDropRate = 5;   //max : 10
-                                        //private int castingNum=1;
+    //private int castingNum=1;
 
+    public void Delta_mHealth(int delta)    { if (mHealth + delta < 1) { mHealth = 1; pHealth = 1; } else { mHealth += delta; pHealth += delta; } }
+    public int Get_mHealth()                { return mHealth; }
+    public void Delta_pHealth(int delta)    { if (pHealth + delta < 0) { pHealth = 0; PlayerDeath(); } else if (pHealth + delta > mHealth) pHealth = mHealth; else pHealth += delta; }
+    public int Get_pHealth()                { return pHealth; }
     
+    public void Delta_mMana(int delta)  { if (mMana + delta < 1) { mMana = 1; pMana = 1; } else { mMana += delta; pMana += delta; } }
+    public int Get_mMana()              { return mMana; }
+    public bool Delta_pMana(float delta)  { bool isGood = true;if (pMana + delta < 0) { isGood = false; return isGood; } else if (pMana + delta > mMana) { pMana = mMana;} else pMana += delta; return isGood; }
+    public float Get_pMana()            { return pMana; }
+
+    public void Delta_manaResen(int delta) { if (manaResen + delta < 1) manaResen = 1; else if (manaResen + delta > 50) manaResen = 100; else manaResen += delta; }
+    private void ResenerateMana()
+    {
+        Delta_pMana(manaResen/5);
+    }
+    private void Do_manaResen() 
+    {
+        InvokeRepeating("ResenerateMana", 0f, 0.2f);
+    }
+    /*private void Stop_manaResen()
+    {
+        CancelInvoke("ResenerateMana");
+    }*/
+    
+    private void PlayerDeath()
+    {
+        //캐릭터 사망 (캐릭터 오브젝트 삭제)
+        //UI 쪽 스크립트에서 관련 함수 호출
+    }
+
     public void AppearArti(Vector2 position) //아티팩트 등장
     {
         int id = RandArti();
@@ -57,9 +87,8 @@ public class FiguresNItem : MonoBehaviour
         else if (randInt < 80)  rarity = 1;  //레어 : 25%
         else if (randInt < 95)  rarity = 2;  //에픽 : 15%
         else                    rarity = 3;  //전설 : 5%
-        
-        // 동일 등급 내, 아티팩트 id 결정 함수
 
+        // 동일 등급 내, 아티팩트 id 결정 함수
         switch (rarity)
         {
             case 0:
@@ -77,6 +106,24 @@ public class FiguresNItem : MonoBehaviour
         }
         return id;
     }  //아티팩트 등장 시(상자, 상점, 유적 클리어 등) 등급과 아티팩트 id 결정부분
+    public void ApplyArtifact2Player(int id)
+    {
+        string ArtiName = id.ToString();
+        if (id < 10)
+            ArtiName = '0'+ ArtiName;
+        if (id < 100)
+            ArtiName = "C0" + ArtiName;   // Common
+        else if (id < 200)
+            ArtiName = 'R' + ArtiName;    // Rare
+        else if (id < 300)
+            ArtiName = 'E' + ArtiName;    // Epic
+        else if (id < 400)
+            ArtiName = 'L' + ArtiName;    // Legendary
+
+        aa.CallArti(ArtiName); // 아티팩트 효과 적용 부분
+        
+        // 인벤토리에 id 전달하면서 적용하라고 특정 함수 호출
+    }
     public void ReturnArtifact(GameObject GO)
     {
         artifactPoolScript.ReturnObject(GO);
@@ -91,6 +138,10 @@ public class FiguresNItem : MonoBehaviour
     {
         int id = 500;
         return id;
+    }
+    public void ApplyScroll2Player(int id) // 스크롤 획득 시 위즈 사용 가능으로 변경 및 인벤토리 이동
+    {
+
     }
     public void ReturnScro(GameObject GO)
     {
@@ -107,7 +158,7 @@ public class FiguresNItem : MonoBehaviour
             return;
         }
         return ;
-    } // 몬스터 사망 시, 상자 오픈 시(?)_일단은// 기타 아이템 등장 확률
+    }
     public int RandETCitem()
     {
         int id = 600, randNum = Random.Range(0, goldDropRate + wizstoneDropRate + HPpotionDropRate + MPpotionDropRate);
@@ -127,6 +178,32 @@ public class FiguresNItem : MonoBehaviour
             id = 606;//위즈스톤 1개 등장 606
         return id;
     } // 몬스터 사망 시, 상자 오픈 시(?)_일단은// 기타 아이템 등장 확률
+    public void ApplyETCitem(int id)
+    {
+        switch (id)
+        {
+            case 601:
+                Delta_pHealth(100); // 체력포션 (대)
+                break;
+            case 602:
+                Delta_pHealth(50); // 체력포션 (소)
+                break;
+            case 603:
+                Delta_pMana(100); // 마나포션 
+                break;
+            case 604:
+                pGold += 3;    //골드 3개
+                break;
+            case 605:
+                pGold += 1;     //골드 1개
+                break;
+            case 606:
+                pWizstone++;      //위즈스톤 1개
+                break;
+        }
+        return;
+        //체력포션, 마나포션, 골드, 위즈스톤 적용
+    } // 기타 아이템 획득 시 플레이어, 골드 개수 등 수치 변경
     public void ReturnETCItem(GameObject GO)
     {
         eTCItemPoolScript.ReturnObject(GO);
@@ -178,8 +255,7 @@ public class FiguresNItem : MonoBehaviour
         boxPoolScript.ReturnObject(GO);
     }
 
-
-    public Sprite ApplySprite(int id)
+    private Sprite ApplySprite(int id)
     {
         if (id / 100 == 0)
         {
@@ -207,67 +283,11 @@ public class FiguresNItem : MonoBehaviour
         }
         return Resources.Load<Sprite>("Sprites/Artifacts/0");
     } // 모든 아이템 등장 시 스프라이트 적용(필드에 등장 or 인벤에 표현
-    public void ApplyArtifact2Player(int id)
-    {
-        switch (id)
-        {
-            case 1:
-                //sampleitem()~
-                GO_Player.GetComponent<Transform>().position = new Vector3(0, 0, 0);
-                pHealth -= 100;
-                pMana -= 100;
-                break;
-        }
-        //id를 받아서, 캐릭터에게 적용시킴. 아이템별로 함수를 만들어서 여기에서 해당 함수 호출하면 될듯 (수치, 기능, 외형, 세트효과개수파악, 인벤토리스크립트에 아이템 ID 전달)
-    } //아티팩트 획득 시 플레이어 수치 변경, 인벤토리 이동, 외형 변경부
-    public void ApplyScroll2Player(int id) // 스크롤 획득 시 위즈 사용 가능으로 변경 및 인벤토리 이동
-    {
-        
-    }
-    public void ApplyETCitem(int id)
-    {
-       switch (id)
-        {
-            case 601 :
-                HpMpRecover(true, 100);// 체력포션 (대)
-                break;
-            case 602 :
-                HpMpRecover(true, 50); // 체력포션 (소)
-                break;
-            case 603 :
-                HpMpRecover(false, 100); // 마나포션 
-                break;
-            case 604 :
-                pGold += 3;    //골드 3개
-                break;
-            case 605:
-                pGold += 1;     //골드 1개
-                break;
-            case 606:
-                pWizstone++;      //위즈스톤 1개
-                break;
-        }
-        return;
-        //체력포션, 마나포션, 골드, 위즈스톤 적용
-    } // 기타 아이템 획득 시 플레이어, 골드 개수 등 수치 변경
-    
+ 
     public bool isColliderPlayer(Collider2D coll){
         bool isIt = false;
         if (coll.gameObject == GO_Player) isIt = true;
         return isIt;
-    }
-
-    private void HpMpRecover(bool isHealth, int recover)
-    {
-        if (isHealth)
-        {
-            if (mHealth < recover+pHealth){pHealth = mHealth; return;}
-            else{pHealth += recover;return;}
-        }else
-        {
-            if (mMana < recover + pMana){pMana = mMana;return;}
-            else{pMana += recover;return;}
-        }
     }
 
     private bool Percent(int r)
@@ -278,14 +298,16 @@ public class FiguresNItem : MonoBehaviour
         return false;
     } //퍼센트 계산기
     
-    private void Awake()
+    void Awake()
     {
+        aa = GetComponent<ApplyArtifacts>();
         um = gameObject.GetComponent<UIManage>();
         artifactPoolScript = GO_ArtifactPool.GetComponent<ArtifactPoolScript>();
         eTCItemPoolScript = GO_ETCItemPool.GetComponent<ETCItemPoolScript>();
         scrollPoolScript = GO_ScrollPool.GetComponent<ScrollPoolScript>();
         boxPoolScript = GO_BoxPool.GetComponent<BoxPoolScript>();
     }
+
     void Start()
     {
         AppearArti(new Vector2(-5, 5));
@@ -298,11 +320,12 @@ public class FiguresNItem : MonoBehaviour
         AppearBox(1, new Vector2(0, -4));
         AppearBox(2, new Vector2(4, -4));
         AppearBox(3, new Vector2(-4, 4));
+        Do_manaResen();
     }
 
     void Update()
     {
-       um.FiguresSend(mHealth,pHealth,mMana,pMana,offenPoint,defenPoint,pGold,pWizstone);
+        um.FiguresSend(mHealth,pHealth,mMana,pMana,offenPoint,defenPoint,pGold,pWizstone);
     }
 }
 

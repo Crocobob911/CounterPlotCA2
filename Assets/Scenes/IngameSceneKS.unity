@@ -1167,6 +1167,7 @@ GameObject:
   - component: {fileID: 1141318827}
   - component: {fileID: 1141318828}
   - component: {fileID: 1141318829}
+  - component: {fileID: 1141318830}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameManager
@@ -1209,6 +1210,21 @@ MonoBehaviour:
   GO_ETCItemPool: {fileID: 1147489504}
   GO_ScrollPool: {fileID: 1704605099}
   GO_BoxPool: {fileID: 731119451}
+  mHealth: 125
+  pHealth: 125
+  mMana: 125
+  pMana: 125
+  offenPoint: 125
+  defenPoint: 0
+  pGold: 5
+  goldDropRate: 10
+  ThreeGoldDropRate: 10
+  pWizstone: 2
+  wizstoneDropRate: 5
+  chestAppearRate: 100
+  HPpotionDropRate: 5
+  BigHPotionDropRate: 10
+  MPpotionDropRate: 5
 --- !u!114 &1141318829
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1222,6 +1238,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GO_figuresUI: {fileID: 738472757}
+--- !u!114 &1141318830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1141318826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 956809561be181b4bb9ee9d51ea2daea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GO_Player: {fileID: 815354540}
 --- !u!1 &1147489504
 GameObject:
   m_ObjectHideFlags: 0
