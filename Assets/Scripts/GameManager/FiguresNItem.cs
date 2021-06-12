@@ -49,7 +49,7 @@ public class FiguresNItem : MonoBehaviour
     
     public void Delta_mMana(int delta)  { if (mMana + delta < 1) { mMana = 1; pMana = 1; } else { mMana += delta; pMana += delta; } um.MPbar_SizeChange(mMana); um.MPbar_Synchro(mMana, pMana); }
     public int Get_mMana()              { return mMana; }
-    public bool Delta_pMana(float delta)  { bool isGood = true;if (pMana + delta < 0) { isGood = false; return isGood; } else if (pMana + delta > mMana) { pMana = mMana;} else pMana += delta; um.MPbar_Synchro(mMana, pMana); return isGood;  }
+    public bool Delta_pMana(float delta){ bool isGood = true;if (pMana + delta < 0) { isGood = false; return isGood; } else if (pMana + delta > mMana) { pMana = mMana;} else pMana += delta; um.MPbar_Synchro(mMana, pMana); return isGood;  }
     public float Get_pMana()            { return pMana; }
 
     public void Delta_manaResen(int delta) { if (manaResen + delta < 1) manaResen = 1; else if (manaResen + delta > 50) manaResen = 100; else manaResen += delta; }
