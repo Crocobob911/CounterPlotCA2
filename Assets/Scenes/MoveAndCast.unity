@@ -150,7 +150,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4047808d46ea6e04daa1e0050bbb275b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  castUI: {fileID: 2133573268}
 --- !u!4 &40094539
 Transform:
   m_ObjectHideFlags: 0
@@ -2248,6 +2247,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f8a6169dfcf6c84d976a9062a0d1c6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  linePool: {fileID: 643927234}
   canvas: {fileID: 1919509310}
+  canvasRcTs: {fileID: 1919509311}
   castDirector: {fileID: 40094538}
+  castBack: {fileID: 346116153}
+  isDrawCanceling: 0

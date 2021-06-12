@@ -8,7 +8,18 @@ public class CastDirector : MonoBehaviour
     //CastUI에서 드로우가 끝나면, 그 점들의 값들을 받아와서 선의 값으로 바꾸는 일
     //바꾼 선에 값에 따른 위즈를 DB에서불러오는 일
 
-    [SerializeField] private CastPattern castUI;
+    #region Singleton
+    public static CastDirector instance;
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
+    }
+    #endregion
 
     private int[] lineNumbers = new int[5];
     private string wizCode;
