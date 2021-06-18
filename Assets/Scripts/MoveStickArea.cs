@@ -77,5 +77,6 @@ public class MoveStickArea : MonoBehaviour
         stick.transform.localPosition = Vector3.zero;
         stickBack.SetActive(false);
         leadCamera.recieveRot(new Vector3(0, 0, 0));
+        player.Move(moveVec);
     }
 }

@@ -4,19 +4,17 @@ using UnityEngine;
 
 public class Player : LiveObject
 {
+    private void Awake()
+    {
+        _awake();
+    }
     private void Start()
     {
-        moveSpeed = 0.5f;
+        moveSpeed = 0.4f;
     }
 
     private void Update()
     {
-        PlayerRotation();
-    }
 
-    public void PlayerRotation()
-    {
-        if (Input.GetKey(KeyCode.W))
-            Move(Vector3.up);
     }
 }
