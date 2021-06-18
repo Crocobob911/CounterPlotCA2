@@ -20,4 +20,8 @@ public class ScriptArtifact : ArtiScroInherit
     {
         PlayOnEnable();
     }
+    private void Update()
+    {
+        gameObject.transform.Translate(new Vector3(0, y, 0));
+    }
 }

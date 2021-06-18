@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2497583910981434962}
   - component: {fileID: -4036489979243919714}
   - component: {fileID: 2497583910981434961}
+  - component: {fileID: 2344315326061248390}
   m_Layer: 0
   m_Name: PrefabScroll
   m_TagString: Scroll
@@ -98,6 +99,7 @@ MonoBehaviour:
   figuresNItem: {fileID: 0}
   id: 0
   isOn: 0
+  y: 0
 --- !u!58 &2497583910981434961
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -114,3 +116,19 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.08
+--- !u!111 &2344315326061248390
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2497583910981434960}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 07fe5ced5feebf34092d78ef89ecdfc3, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 07fe5ced5feebf34092d78ef89ecdfc3, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0

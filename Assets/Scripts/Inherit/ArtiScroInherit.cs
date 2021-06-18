@@ -7,6 +7,8 @@ public class ArtiScroInherit : MonoBehaviour
     public FiguresNItem figuresNItem;
     public int id = 000;
     public bool isOn = false;
+    public float y = 0f;
+    
     private void TriggerOn()
     {
         isOn = true;
@@ -15,6 +17,7 @@ public class ArtiScroInherit : MonoBehaviour
     {
         isOn = false;
         Invoke("TriggerOn", 1);
+        
     }
     public void PlayAwake()
     {

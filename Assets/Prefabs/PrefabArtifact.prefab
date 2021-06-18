@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3354544781750625031}
   - component: {fileID: -2184950015156002540}
   - component: {fileID: 3354544781750625029}
+  - component: {fileID: 183302208051596720}
   m_Layer: 0
   m_Name: PrefabArtifact
   m_TagString: Artifacts
@@ -98,6 +99,7 @@ MonoBehaviour:
   figuresNItem: {fileID: 0}
   id: 0
   isOn: 0
+  y: 0
 --- !u!58 &3354544781750625029
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -114,3 +116,20 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.16
+--- !u!111 &183302208051596720
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3354544781750625030}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 28b95f89505d47c4083c0801a16c0fe6, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 28b95f89505d47c4083c0801a16c0fe6, type: 2}
+  - {fileID: 7400000, guid: d161d6f729ccc984bbaf958903d416d1, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
