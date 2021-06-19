@@ -209,6 +209,10 @@ public class FiguresNItem : MonoBehaviour
         eTCItemPoolScript.ReturnObject(GO);
     }
 
+    public void AppearBoxTest()
+    {
+        boxPoolScript.GetBox(new Vector2(0,0), 611, ApplySprite(611));
+    }
     public void AppearBox(int AreaType, Vector2 position) //구역 클리어 시
     {
         int id = -1;
@@ -328,7 +332,6 @@ public class FiguresNItem : MonoBehaviour
     void Update()
     {
         um.FiguresSend(mHealth,pHealth,mMana,pMana,offenPoint,defenPoint,pGold,pWizstone);
-        
     }
 }
 

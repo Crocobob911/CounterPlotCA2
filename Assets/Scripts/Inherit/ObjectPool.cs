@@ -28,7 +28,6 @@ public class ObjectPool : MonoBehaviour
     {
         var newObj = Instantiate(poolObjPrefab, transform);
         newObj.SetActive(false);
-
         return newObj;
     }
 
@@ -42,6 +41,8 @@ public class ObjectPool : MonoBehaviour
 
     public void ReturnObject(GameObject obj)
     {
+        obj.transform.GetChild(0).localPosition = new Vector2(0, 0);
+        obj.transform.GetChild(0).localScale = new Vector2(1, 1);
         obj.SetActive(false);
         poolObjs.Enqueue(obj);
     }

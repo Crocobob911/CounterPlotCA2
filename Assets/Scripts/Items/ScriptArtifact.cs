@@ -9,7 +9,7 @@ public class ScriptArtifact : ArtiScroInherit
         if (isOn && figuresNItem.isColliderPlayer(collider))
         {
             figuresNItem.ApplyArtifact2Player(id);
-            figuresNItem.ReturnArtifact(gameObject);
+            figuresNItem.ReturnArtifact(transform.parent.gameObject);
         }
     }
     private void Awake()

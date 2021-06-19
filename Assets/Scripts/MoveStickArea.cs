@@ -17,14 +17,22 @@ public class MoveStickArea : MonoBehaviour
     private float stickBackRadius;
     private bool isMoving;
 
+    public Vector3 Get_moveVec()
+    {
+        return moveVec;
+    }
+    public float Get_moveDis()
+    {
+        return moveDis;
+    }
+
     void Start()
     {
         Init();
         startPos = transform.position;
-        stickBackRadius = stickBack.GetComponent<RectTransform>().rect.width / 2f;
+        stickBackRadius = stickBack.GetComponent<RectTransform>().rect.width / 2f - 10f;
         leadCamera = Camera.GetComponent<LeadCamera>();
         //Debug.Log(stickBackRadius);
-
         stickBack.SetActive(false);
     }
 

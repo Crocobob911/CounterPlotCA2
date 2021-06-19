@@ -12,7 +12,6 @@ public class Player : LiveObject
     {
         moveSpeed = 0.4f;
     }
-
     private void Update()
     {
 

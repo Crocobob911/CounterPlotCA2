@@ -51,9 +51,12 @@ TagManager:
   - name: Blocks
     uniqueID: 3471320431
     locked: 0
-  - name: Player
+  - name: Shadows
     uniqueID: 4289112865
     locked: 0
-  - name: Items
+  - name: Player
     uniqueID: 3623560069
+    locked: 0
+  - name: Items
+    uniqueID: 2341796655
     locked: 0

@@ -9,7 +9,7 @@ public class ScriptScroll : ArtiScroInherit
         if (isOn && figuresNItem.isColliderPlayer(collider))
         {
             figuresNItem.ApplyScroll2Player(id);
-            figuresNItem.ReturnScro(gameObject);
+            figuresNItem.ReturnScro(transform.parent.gameObject);
         }
     }
     private void Awake()
