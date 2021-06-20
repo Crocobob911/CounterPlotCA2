@@ -13,6 +13,7 @@ public class FiguresNItem : MonoBehaviour
     [SerializeField] private GameObject GO_ETCItemPool;
     [SerializeField] private GameObject GO_ScrollPool;
     [SerializeField] private GameObject GO_BoxPool;
+    [SerializeField] private GameObject GO_MonsterPool;
 
     private ApplyArtifacts aa;
     private UIManage um;
@@ -20,6 +21,7 @@ public class FiguresNItem : MonoBehaviour
     private ETCItemPoolScript eTCItemPoolScript;
     private ScrollPoolScript scrollPoolScript;
     private BoxPoolScript boxPoolScript;
+    private SlimePoolScript slimePoolScript;
 
     private int mHealth = 125;
     private int pHealth = 1;
@@ -310,10 +312,12 @@ public class FiguresNItem : MonoBehaviour
         eTCItemPoolScript = GO_ETCItemPool.GetComponent<ETCItemPoolScript>();
         scrollPoolScript = GO_ScrollPool.GetComponent<ScrollPoolScript>();
         boxPoolScript = GO_BoxPool.GetComponent<BoxPoolScript>();
+        slimePoolScript = GO_MonsterPool.GetComponent<SlimePoolScript>();
     }
 
     void Start()
     {
+        slimePoolScript.GetSlime(new Vector2(-7, 7));
         AppearArti(new Vector2(-5, 5));
         AppearETCitem(3, new Vector2(3, 0));
         AppearETCitem(3, new Vector2(3, -3));

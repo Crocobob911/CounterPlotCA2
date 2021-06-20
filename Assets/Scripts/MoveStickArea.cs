@@ -41,6 +41,7 @@ public class MoveStickArea : MonoBehaviour
         if (isMoving)
         {
             player.Move(moveVec * moveDis / 10);
+            player.ChangeMoveAnima(moveVec);
             leadCamera.recieveRot(moveVec * moveDis / 32);
         }
     }
@@ -85,6 +86,6 @@ public class MoveStickArea : MonoBehaviour
         stick.transform.localPosition = Vector3.zero;
         stickBack.SetActive(false);
         leadCamera.recieveRot(new Vector3(0, 0, 0));
-        player.Move(moveVec);
+        player.ChangeMoveAnima(moveVec);
     }
 }
