@@ -621,8 +621,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1141318828}
-        m_MethodName: AppearBoxTest
+      - m_Target: {fileID: 372064954}
+        m_MethodName: MakeSlime
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -789,6 +789,7 @@ GameObject:
   m_Component:
   - component: {fileID: 372064952}
   - component: {fileID: 372064953}
+  - component: {fileID: 372064954}
   m_Layer: 0
   m_Name: MonsterPool
   m_TagString: Untagged
@@ -825,6 +826,18 @@ MonoBehaviour:
   poolObjPrefab: {fileID: 8577421770926916823, guid: d3165281dd6728e4ba700591cc2b8176,
     type: 3}
   poolLength: 10
+--- !u!114 &372064954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 372064951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbc8693f68daf6c498a72b8185033d58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &377489421
 GameObject:
   m_ObjectHideFlags: 0
