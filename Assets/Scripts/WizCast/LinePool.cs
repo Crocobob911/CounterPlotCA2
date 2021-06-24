@@ -9,6 +9,7 @@ public class LinePool : ObjectPool
         var obj = GetObject().GetComponent<CircleId>();
         obj.gameObject.transform.localPosition = pos;
         obj.id = id;
+        //Debug.Log("LinePool : " + id + " line on");
         return obj;
     }
 }

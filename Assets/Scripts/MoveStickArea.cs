@@ -9,22 +9,17 @@ public class MoveStickArea : MonoBehaviour
     [SerializeField] private Player player;
     [SerializeField] private GameObject Camera;
 
-    private LeadCamera leadCamera;
-
-    private Vector3 startPos;
     private Vector3 moveVec;
+    public Vector3 MoveVec { get { return moveVec; } }
+
     private float moveDis;
+    public float MoveDis { get { return moveDis; } }
+
+    private LeadCamera leadCamera;
+    private Vector3 startPos;
     private float stickBackRadius;
     private bool isMoving;
 
-    public Vector3 Get_moveVec()
-    {
-        return moveVec;
-    }
-    public float Get_moveDis()
-    {
-        return moveDis;
-    }
 
     void Start()
     {
@@ -54,7 +49,7 @@ public class MoveStickArea : MonoBehaviour
         isMoving = false;
     }
 
-    public void DeginDrag(BaseEventData _Data)
+    public void BeginDrag(BaseEventData _Data)
     {
         PointerEventData Data = _Data as PointerEventData;
         Vector3 touchPos = Data.position;

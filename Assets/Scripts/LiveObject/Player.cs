@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class Player : LiveObject
 {
-    private Animator animator;
+    [SerializeField] private Animator animator;
     private int State = 0;
     private int _State = 0;
+
+    bool _isTestMode;
+
     enum state
     {
         idle = 0,
@@ -16,13 +19,24 @@ public class Player : LiveObject
         left = 4
     }
 
-    private void Awake()
+    private void Start()
+    {
+        PlayerInit();
+    }
+
+    void PlayerInit()
     {
         State = 0;
         _State = 0;
+        _isTestMode = false;
+        MaxHP = 10f;
+        HP = 10f;
+        MaxMP = 10f;
+        MP = 10f;
+        attackDamage = 1f;
         moveSpeed = 0.4f;
-        animator = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
     }
+
     public void ChangeMoveAnima(Vector3 rot)
     {
         State = DecideMoveState(rot);
@@ -41,5 +55,36 @@ public class Player : LiveObject
         if (rot.x < 0 && Mathf.Abs(rot.x) > Mathf.Abs(rot.y)) return (int)state.left;
         return 0;
     }
-    
+
+
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F12))
+        {
+            _isTestMode = true;
+            Debug.Log("---TEST MODE---");
+        }
+
+
+        if (_isTestMode)
+        {
+            if (Input.GetKeyDown(KeyCode.F1))
+            {
+                GetDamage(1f);
+            }
+            if (Input.GetKeyDown(KeyCode.F2))
+            {
+                GetHeal(1f);
+            }
+            if (Input.GetKeyDown(KeyCode.F3))
+            {
+                StartCoroutine(GetStun(1f));
+            }
+            if (Input.GetKeyDown(KeyCode.F4))
+            {
+                StartCoroutine(GetSlow(30f, 2f));
+            }
+        }
+    }
 }
