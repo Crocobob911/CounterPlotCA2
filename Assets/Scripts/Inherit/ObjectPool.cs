@@ -41,10 +41,6 @@ public class ObjectPool : MonoBehaviour
 
     public void ReturnObject(GameObject obj)
     {
-        //obj.transform.GetChild(0).localPosition = new Vector3(0, 0, 0);
-        //obj.transform.GetChild(0).localScale = new Vector2(1, 1);
-        //!!!!!!!!!!요기가 문제였어 규성!!!!!!!!!!!
-
         obj.SetActive(false);
         poolObjs.Enqueue(obj);
     }
