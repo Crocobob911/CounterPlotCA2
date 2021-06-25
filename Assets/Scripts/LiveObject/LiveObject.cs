@@ -6,28 +6,22 @@ abstract public class LiveObject : MonoBehaviour
 {
     protected float hp;
     public float HP { get { return hp; } set { if (value < 0) hp = 0; else if (value > maxHp) hp = maxHp; else hp = value; } }
-
-
+    
     protected float maxHp;
     public float MaxHP { get { return maxHp; } set { if (value < 0) maxHp = 0; else maxHp = value; } }
-
-
+    
     protected float mp;
     public float MP { get { return mp; } set { if (value < 0) mp = 0; else if (value > maxMp) mp = maxMp; else mp = value; } }
-
-
+    
     protected float maxMp;
     public float MaxMP { get { return maxMp; } set { if (value < 0) maxMp = 0; else maxMp = value; } }
-
-
+    
     protected float attackDamage;
     public float AttackDamage { get { return attackDamage; } set { if (value < 0) attackDamage = 0; else attackDamage = value; } }
-
-
+    
     protected float moveSpeed;
     public float MoveSpeed { get { return moveSpeed; } set { if (value < 0) moveSpeed = 0; else moveSpeed = value; } }
-
-
+    
     public void Move(Vector3 rot)
     {
         transform.Translate(rot * MoveSpeed * Time.deltaTime);

@@ -5,10 +5,6 @@ using UnityEngine;
 public class FiguresNItem : MonoBehaviour
 {
     [SerializeField] private GameObject GO_Player;
-    [SerializeField] private GameObject GO_Arti;
-    [SerializeField] private GameObject GO_ETCi;
-    [SerializeField] private GameObject GO_Scro;
-    [SerializeField] private GameObject GO_Box;
     [SerializeField] private GameObject GO_ArtifactPool;
     [SerializeField] private GameObject GO_ETCItemPool;
     [SerializeField] private GameObject GO_ScrollPool;
