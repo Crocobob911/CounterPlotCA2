@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class mainSlimeScript : LiveObject
+public class mainSlimeScript : Monsters
 {
     enum state
     {
