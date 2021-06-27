@@ -6,17 +6,40 @@ using UnityEngine;
 
 public class IO : MonoBehaviour
 {
+    #region Singleton
+    public static IO instance;
     private void Awake()
     {
-        
+        if (instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
+    }
+    #endregion
+
+    protected int isOnIO;
+    public int IsOnIO { get { return isOnIO; } set { isOnIO = value; } }
+    private string wizCode; public string Get_wizCode() { return wizCode; }
+    private int endCircle; public int Get_endCircle() { return endCircle; }
+
+    private void Start()
+    {
+        init();
     }
     private void init()
     {
-        
+        isOnIO = 0;
+        wizCode = null;
+        endCircle = 0;
     }
-    public string IO_Decide(int MonsterID, int MonsterState)
+    public void IO_Decide(int MonsterID, int MonsterState , ref string w, ref int[] cir, ref int[] lin)
     { //MonsterID => 일반몬스터 -> 000~999 엘리트몬스터 -> 1000~1999 // 보스몬스터 2000~
-        // 특정 보스 몬스터의 경우 연속된 IOwiz가 있었으면 좋겠음. 말그대로 보스 패턴인거지. 나중에 유저들이 익숙해지면 빨리 깰 수도 있는거고(후다닥 미리 그어놓는다던가)
+      // 특정 보스 몬스터의 경우 연속된 IOwiz가 있었으면 좋겠음. 말그대로 보스 패턴인거지
+        // 나중에 유저들이 익숙해지면 빨리 깰 수도 있는거고(후다닥 미리 그어놓는다던가)
+        // state 0 : 일반
+        // state 1 : 분노
         int IO_level = 0;
         int MonsterType = MonsterID / 1000;
         if (MonsterType == 0)
@@ -52,22 +75,22 @@ public class IO : MonoBehaviour
                 IO_level = 5;
             }
         }
-        
-        return IO_Rand(IO_level);
+        IO_Rand(IO_level, ref w, ref cir, ref lin);
     }
-    
-    private string IO_Rand(int IO_level) //여기서 랜덤으로 고르고 난 뒤에, 플레이어가 가진 위즈와 동일한게 있는지 확인해서, 없는걸로 골라야함 (또는 그냥 역산 시스템 쓰면 위즈 시전 봉인되는걸로 하던가)
+    private void IO_Rand(int IO_level, ref string w, ref int[] cir, ref int[] lin) //여기서 랜덤으로 고르고 난 뒤에, 플레이어가 가진 위즈와 동일한게 있는지 확인해서, 없는걸로 골라야함 (또는 그냥 역산 시스템 쓰면 위즈 시전 봉인되는걸로 하던가)
     {
         int usingCircle = 0; // 사용할 성(점) 개수
-        int startDot = 0; // 시작점
-        string startNwizCode = null;  // 시작점과 위즈코드 예: 100016 시작점이 id 1이며, num 1 num6 인 선으로 구성된 패턴
-
-        int[] Rcircles = new int[6]; //사용한 점들 순서대로
+        
         int[] RlineNum = new int[5]; // 점 순서대로 NumberDetecting
+        int[] Rcircles = new int[6]; //사용한 점들 순서대로
         for (int i = 0; i < 5; i++)
         {
             RlineNum[i] = 0;
         } // RlineNum 초기화
+        for (int i = 0; i < 6; i++)
+        {
+            Rcircles[i] = 0;
+        }
 
         if (IO_level == 1)
         {
@@ -91,23 +114,32 @@ public class IO : MonoBehaviour
         }
 
         //여기서 이제. 시작점 랜덤으로 지정하고, (그 점에서 다른 점 선택하고,) 를 usingDot 만큼 반복하고, 마지막으로 usingDot이 3 이상일 때 처음 점으로 돌아갈지 말지 (시작점과 끝점을 이을건지 말건지) 결정하는 부분까지 추가해서 circles를 구성하고,
-        //numberDetecting으로 RlineNum을 만들고, startNwizCode로 보내버리면 완성.
-        startDot = UnityEngine.Random.Range(1, 6); // 시작점 정하기
-        Rcircles[0] = startDot;
-        for (int i = 1; i < usingCircle; i++)
+        //numberDetecting으로 RlineNum을 만들고, circlesNwizCode로 보내버리면 완성.
+
+        #region ArraryCircles
+        int l;
+        for (l = 0; l < usingCircle; l++)
         {
-            Rcircles[i] = UnityEngine.Random.Range(1,6);
-            for (int j =0; j < i;j++)
+            Rcircles[l] = UnityEngine.Random.Range(1,6);
+            for (int j =0; j < l;j++)
             {
-                if (Rcircles[i] == Rcircles[j])
+                if (Rcircles[l] == Rcircles[j])
                 {
-                    i--;
+                    l--;
                     break;
                 }
             }
         }
+        if(usingCircle > 2)
+        {
+            if (Percent(100/(usingCircle+1)))
+            {
+                Rcircles[l] = Rcircles[0];
+            }
+        }
+        #endregion
 
-        #region NumberDetecting
+        #region ArrayLines
         int a, b;
         for (int i = 0; i < 5; i++)
         {
@@ -144,14 +176,39 @@ public class IO : MonoBehaviour
                     break;
             }
         }
-        #endregion
         Array.Sort(RlineNum);
+        #endregion
 
-
-        startNwizCode = startDot.ToString()+RlineNum;
-        return startNwizCode;
+        for(int i = 0; i < RlineNum.Length; i++)
+        {
+            wizCode += RlineNum[i].ToString();
+        }
+        w = wizCode;
+        cir = Rcircles;
+        lin = RlineNum;
     }
     
+    public void Set_wizCodeNendCircle(string w, int e)
+    {
+        wizCode = w;
+        endCircle = e;
+        Debug.Log(w);
+        Debug.Log(e);
+    }
+    public void Init_wizCodeNendCircle()
+    {
+        wizCode = null;
+        endCircle = 0;
+    }
+
+
+    private bool Percent(int r)
+    {
+        int randNum = UnityEngine.Random.Range(0, 100);
+        if (randNum < r)
+            return true;
+        return false;
+    }
 }
 
 //MonsterState -> 0: 일반 1: 분노

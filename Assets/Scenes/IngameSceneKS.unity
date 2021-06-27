@@ -883,7 +883,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1f932983c42b504487921d1f38a0cd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolObjPrefab: {fileID: 8577421770926916823, guid: d3165281dd6728e4ba700591cc2b8176,
+  poolObjPrefab: {fileID: 8577421770926916823, guid: 90a3f2dc0a154af459158f255c62fd64,
     type: 3}
   poolLength: 10
 --- !u!114 &372064954

@@ -18,5 +18,4 @@ public class Monsters : LiveObject
         set { monsterState = value; }
     }
 
-
 }

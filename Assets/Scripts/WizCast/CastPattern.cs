@@ -166,7 +166,7 @@ public class CastPattern : MonoBehaviour
 
         if (!isDrawCanceling) //드로잉 취소가 아닐 때
         {
-            castDirector.ActiveWiz(drawLines);
+            castDirector.PatternComplete(drawLines);
         }
         else //드로잉 취소일 때
         {
