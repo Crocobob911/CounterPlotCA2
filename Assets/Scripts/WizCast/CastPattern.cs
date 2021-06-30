@@ -24,7 +24,6 @@ public class CastPattern : MonoBehaviour
     [SerializeField] private Image castBack;
     [SerializeField] private LinePool linePool;
     private List<CircleId> circles = new List<CircleId>();
-
     private List<CircleId> pooledLines = new List<CircleId>();
     private int[] drawLines = new int[6]; //선이 무슨 점에서 시작했느냐
     private bool isDrawing;
