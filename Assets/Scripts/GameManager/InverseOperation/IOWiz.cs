@@ -44,7 +44,7 @@ public class IOWiz : MonoBehaviour
 
         for (int i = 1; i <= 5; i++)
         {
-            circleIds.Add(transform.GetChild(i).GetComponent<CircleId>());
+            circleIds.Add(transform.GetChild(i-1).GetComponent<CircleId>());
             circleIds[i - 1].id = i;
         }
         //init();
