@@ -18,13 +18,13 @@ public class IOWiz : MonoBehaviour
     private Transform lineOnEditTr;
     private GameObject ball;
     private Transform ballTr;
-
-    private int circleOnEdit;
+    
     private int monsterID;
     private int monsterState;
     private int[] circles = new int[6];
     private int[] lineNum = new int[5];
     private List<CircleId> circleIds = new List<CircleId>();
+    private int d;
 
     private int usingCircleN;
     private float castingTime;
@@ -44,17 +44,17 @@ public class IOWiz : MonoBehaviour
 
         for (int i = 1; i <= 5; i++)
         {
-            circleIds.Add(transform.GetChild(i).GetComponent<CircleId>());
+            circleIds.Add(transform.GetChild(i-1).GetComponent<CircleId>());
             circleIds[i - 1].id = i;
         }
         //init();
     }
     private void init()
     {
-        circleOnEdit = 0;
         startCircle = 0;
         monsterState = 0;
         wizCode = null;
+        d = 0;
         for (int i = 0; i < 6; i++)
         {
             circles[i] = 0;
@@ -73,6 +73,12 @@ public class IOWiz : MonoBehaviour
         startCircle = circles[0];
         Set_CastingTime();
         Set_UsingCircleN();
+
+        SetLine(startCircle);
+        ballTr.localPosition = circleIds[startCircle - 1].transform.localPosition;
+        lineOnEditTr.rotation = Quaternion.Euler(circleIds[startCircle - 1].transform.localPosition - circleIds[circles[1]-1].transform.localPosition);
+        
+
     }
     private void Update() // 값이 바뀔 때만 체킹하고 싶은데 그건 나중에
     {
@@ -86,14 +92,18 @@ public class IOWiz : MonoBehaviour
         castingTime -= Time.deltaTime;
     }
     private void Caster()//setline 해주면서, setline의 크기를 바꿔줌 (공의 움직임을 매개로)
-    {/*
-        if () {
-            ballTr.localPosition = Vector3.MoveTowards(ballTr.localPosition, , 2f);
-
-            if ()//이동하는 공의 위치 == 다음 circle의 위치 -> 
-            { }
-        }*/
-    }
+    {
+        if (castingTime > 0) {
+            if (ballTr.localPosition == circleIds[circles[d+1]-1].transform.localPosition)//이동하는 공의 위치 == 다음 circle의 위치 -> 
+            {
+                d++;
+                SetLine(circles[d]);
+                lineOnEditTr.rotation = Quaternion.Euler(circleIds[circles[d+1]-1].transform.localPosition -circleIds[circles[d]-1].transform.localPosition);
+            }
+            ballTr.localPosition = Vector3.MoveTowards(ballTr.localPosition, circleIds[circles[d + 1]-1].transform.localPosition, 2f);
+            lineOnEditTr.localScale = new Vector2(0, Mathf.Sqrt(Mathf.Pow(lineOnEditTr.localPosition.x - ballTr.localPosition.x, 2) + Mathf.Pow(lineOnEditTr.localPosition.y - ballTr.localPosition.y, 2)));
+        }
+    }//caster 에서 공이 움직이고, 공과 선의 중심점 차이만큼 선의 비율이 증가. 그리고 타겟이었던 점까지 공이 도달했다면 다음 타겟으로 변경하고 선도 새로 set함
     private void Checker()
     {
         if (castingTime < 0) // 입력 시간이 다 갔는지 체크
@@ -156,7 +166,6 @@ public class IOWiz : MonoBehaviour
         lineOnEdit = linePool.GetLine(circleIds[c - 1].transform.localPosition, c).gameObject;
         lineOnEditTr = lineOnEdit.GetComponent<Transform>();
         lineOnEditTr.localPosition = circleIds[c - 1].transform.localPosition;
-        circleOnEdit = c;
     }
 
     // 만들어야하는것. 엘리트 몬스터가 만들어지고 난 후, 어떤 조건에서 IO system이 생겨날것인지 결정하는 것이 필요함. 몬스터 내에서 체력이나 만들어진 시간 등에 따라 함수를 호출하는 방식
